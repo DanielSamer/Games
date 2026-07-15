@@ -54,7 +54,7 @@ export function AuthPage({ mode }: Props) {
 
       <div className="menu-topbar">
         <Link to="/" className="menu-masthead" style={{ textDecoration: "none" }}>
-          Game Shows
+          Games
         </Link>
 
         <div className="menu-topbar__right">

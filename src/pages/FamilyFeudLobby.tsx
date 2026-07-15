@@ -69,7 +69,7 @@ export function FamilyFeudLobby() {
           ← <Bi en="Back to menu" ar="رجوع للقائمة" />
         </Link>
         <h1 className="lobby-title">
-          <Bi en="Sa2alna El Nas — Your Games" ar="عيلة وعيلة — ألعابك" />
+          <Bi en="Asked the People — Your Games" ar="سألنا الناس — ألعابك" />
         </h1>
         <p className="lobby-subtitle">
           <Bi en="Pick a saved game to host, or create a new one." ar="اختار لعبة محفوظة أو أنشئ لعبة جديدة." />

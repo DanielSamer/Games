@@ -46,7 +46,7 @@ export function ChaserLobby() {
   useEffect(() => {
     if (games && games.length === 0 && !seeded.current) {
       seeded.current = true;
-      void ensureSeeded({ name: "El7a2o — Sample Game", questions: seedQuestions });
+      void ensureSeeded({ name: "Catch Him — Sample Game", questions: seedQuestions });
     }
   }, [games, ensureSeeded]);
 
@@ -70,7 +70,7 @@ export function ChaserLobby() {
           <Bi en="Host mode" ar="وضع المُقدِّم" />
         </span>
         <h1 className="lobby-title">
-          <Bi en="El7a2o — Your Games" ar="اهزم الملاحقين — ألعابك" />
+          <Bi en="Catch Him — Your Games" ar="إلحقوه — ألعابك" />
         </h1>
         <p className="lobby-subtitle">
           <Bi en="Pick a saved game to host, or create a new one." ar="اختار لعبة محفوظة أو أنشئ لعبة جديدة." />

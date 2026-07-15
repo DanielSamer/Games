@@ -11,8 +11,8 @@ const shows: ShowCardData[] = [
     id: "feud",
     to: "/family-feud",
     accent: "#3b82f6",
-    titleLinesEn: ["Sa2alna", "El Nas"],
-    nameAr: "عيلة وعيلة",
+    titleLinesEn: ["Asked", "the People"],
+    nameAr: "سألنا الناس",
     descEn: "Survey says! Bilingual, host-run board game.",
     descAr: "استطلاع رأي! لعبة يديرها المُقدِّم.",
     tagEn: "2 teams · host-run",
@@ -22,8 +22,8 @@ const shows: ShowCardData[] = [
     id: "chaser",
     to: "/chaser",
     accent: "#e0333f",
-    titleLinesEn: ["El7a2o"],
-    nameAr: "اهزم الملاحقين",
+    titleLinesEn: ["Catch", "Him"],
+    nameAr: "إلحقوه",
     descEn: "Outrun the Chaser for the prize fund.",
     descAr: "اهرب من الملاحق واكسب الجائزة.",
     tagEn: "1 vs 1 · host-run",
@@ -33,8 +33,8 @@ const shows: ShowCardData[] = [
     id: "nhie",
     to: "/never-have-i-ever",
     accent: "#ec4899",
-    titleLinesEn: ["3omry", "Ma"],
-    nameAr: "أبداً ما عملت",
+    titleLinesEn: ["I Didn't", "Do It"],
+    nameAr: "عمري ما",
     descEn: "Confess, laugh, and put a finger down.",
     descAr: "اعترف واضحك ونزّل صباعك.",
     tagEn: "Group game · coming soon",
@@ -56,7 +56,7 @@ export function MainMenu() {
       <MenuBackground accent={hoveredShow?.accent ?? null} />
 
       <div className="menu-topbar">
-        <span className="menu-masthead">Game Shows</span>
+        <span className="menu-masthead">Games</span>
 
         <div className="menu-topbar__right">
           <div className="menu-lang" role="group" aria-label="Site language">

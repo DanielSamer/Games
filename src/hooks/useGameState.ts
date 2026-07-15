@@ -47,7 +47,7 @@ const initialState: GameState = {
   primaryLang: "ar",
   muted: false,
   strikeFlash: false,
-  title: "Sa2alna El Nas",
+  title: "Asked the People",
 };
 
 function sortedAnswers(round: Round | undefined) {
