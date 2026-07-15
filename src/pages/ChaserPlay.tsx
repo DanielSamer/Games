@@ -6,6 +6,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { useChaserState } from "../hooks/useChaserState";
 import { Bi } from "../components/Bi";
 import { ChaserTimerPanel } from "../components/chaser/ChaserTimerPanel";
+import { ChaserStepBoard } from "../components/chaser/ChaserStepBoard";
 import { ChaserQuestionCard } from "../components/chaser/ChaserQuestionCard";
 import { ChaserHostControls } from "../components/chaser/ChaserHostControls";
 import { ChaserQuestionManager } from "../components/chaser/ChaserQuestionManager";
@@ -27,6 +28,7 @@ export function ChaserPlay() {
     start,
     correct,
     wrong,
+    stealResolve,
     togglePause,
     reset,
     toggleMute,
@@ -51,6 +53,17 @@ export function ChaserPlay() {
         return;
       }
       if (state.phase !== "playing") return;
+      if (state.stealActive) {
+        if (e.key === " " || e.code === "Space") {
+          e.preventDefault();
+          stealResolve(true);
+        } else if (e.key.toLowerCase() === "x") {
+          stealResolve(false);
+        } else if (e.key.toLowerCase() === "p") {
+          togglePause();
+        }
+        return;
+      }
       if (e.key === " " || e.code === "Space") {
         e.preventDefault();
         correct();
@@ -62,7 +75,7 @@ export function ChaserPlay() {
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [state.phase, correct, wrong, togglePause, questionManagerOpen]);
+  }, [state.phase, state.stealActive, correct, wrong, stealResolve, togglePause, questionManagerOpen]);
 
   if (!gameId) {
     return (
@@ -128,9 +141,15 @@ export function ChaserPlay() {
           {state.phase === "over" && (
             <p className="chaser-winner-banner">
               {state.winner === "contestant" ? (
-                <Bi en="Time's up for the Chaser — Contestant wins!" ar="خلص وقت الملاحق — المتسابق كسب!" />
+                <Bi
+                  en={`Contestant wins ${state.scores.contestant} to ${state.scores.chaser}!`}
+                  ar={`المتسابق كسب ${state.scores.contestant} مقابل ${state.scores.chaser}!`}
+                />
               ) : (
-                <Bi en="Time's up for the Contestant — Chaser wins!" ar="خلص وقت المتسابق — الملاحق كسب!" />
+                <Bi
+                  en={`Chaser catches the contestant, ${state.scores.chaser} to ${state.scores.contestant}!`}
+                  ar={`الملاحق لحق بالمتسابق، ${state.scores.chaser} مقابل ${state.scores.contestant}!`}
+                />
               )}
             </p>
           )}
@@ -158,7 +177,14 @@ export function ChaserPlay() {
             </p>
           </div>
         ) : (
-          <ChaserQuestionCard question={currentQuestion} flash={state.flash} showAnswer={showAnswer} />
+          <div className="chaser-main-stack">
+            <ChaserQuestionCard question={currentQuestion} flash={state.flash} showAnswer={showAnswer} />
+            <ChaserStepBoard
+              contestantScore={state.scores.contestant}
+              chaserScore={state.scores.chaser}
+              activeSide={state.activeSide}
+            />
+          </div>
         )}
       </main>
 
@@ -170,10 +196,12 @@ export function ChaserPlay() {
           showAnswer={showAnswer}
           configuredTimes={state.configuredTimes}
           questionCount={questions.length}
+          stealActive={state.stealActive}
           onSetTime={setTime}
           onStart={start}
           onCorrect={correct}
           onWrong={wrong}
+          onStealResolve={stealResolve}
           onTogglePause={togglePause}
           onReset={() => {
             reset();

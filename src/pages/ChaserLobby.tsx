@@ -66,6 +66,9 @@ export function ChaserLobby() {
         <Link to="/" className="stub-back">
           ← <Bi en="Back to menu" ar="رجوع للقائمة" />
         </Link>
+        <span className="lobby-card__eyebrow">
+          <Bi en="Host mode" ar="وضع المُقدِّم" />
+        </span>
         <h1 className="lobby-title">
           <Bi en="Beat the Chasers — Your Games" ar="اهزم الملاحقين — ألعابك" />
         </h1>

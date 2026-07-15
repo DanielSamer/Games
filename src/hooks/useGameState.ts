@@ -16,6 +16,7 @@ interface GameState {
   primaryLang: Lang;
   muted: boolean;
   strikeFlash: boolean;
+  title: string;
 }
 
 type Action =
@@ -28,6 +29,7 @@ type Action =
   | { type: "RESET_ROUND" }
   | { type: "RESET_GAME" }
   | { type: "SET_TEAM_NAME"; team: TeamId; name: string }
+  | { type: "SET_TITLE"; title: string }
   | { type: "TOGGLE_LANG" }
   | { type: "TOGGLE_MUTE" }
   | { type: "CLEAR_STRIKE_FLASH" }
@@ -45,6 +47,7 @@ const initialState: GameState = {
   primaryLang: "ar",
   muted: false,
   strikeFlash: false,
+  title: "Family Feud",
 };
 
 function sortedAnswers(round: Round | undefined) {
@@ -116,6 +119,8 @@ function reducer(state: GameState, action: Action): GameState {
           [action.team]: { ...state.teams[action.team], name: action.name },
         },
       };
+    case "SET_TITLE":
+      return { ...state, title: action.title };
     case "TOGGLE_LANG":
       return { ...state, primaryLang: state.primaryLang === "en" ? "ar" : "en" };
     case "TOGGLE_MUTE":

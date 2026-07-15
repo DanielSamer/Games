@@ -8,10 +8,12 @@ interface Props {
   showAnswer: boolean;
   configuredTimes: Record<ChaserSide, number>;
   questionCount: number;
+  stealActive: boolean;
   onSetTime: (side: ChaserSide, seconds: number) => void;
   onStart: (firstSide: ChaserSide) => void;
   onCorrect: () => void;
   onWrong: () => void;
+  onStealResolve: (stolen: boolean) => void;
   onTogglePause: () => void;
   onReset: () => void;
   onToggleMute: () => void;
@@ -26,10 +28,12 @@ export function ChaserHostControls({
   showAnswer,
   configuredTimes,
   questionCount,
+  stealActive,
   onSetTime,
   onStart,
   onCorrect,
   onWrong,
+  onStealResolve,
   onTogglePause,
   onReset,
   onToggleMute,
@@ -89,6 +93,36 @@ export function ChaserHostControls({
             <Bi en="Add questions before starting." ar="ضيف أسئلة قبل ما تبدأ." />
           </p>
         )}
+      </div>
+    );
+  }
+
+  if (stealActive) {
+    return (
+      <div className="host-controls chaser-host-controls">
+        <div className="host-controls__row">
+          <p className="chaser-steal-banner">
+            <Bi
+              en="Chaser missed it — did the Contestant steal it back?"
+              ar="الملاحق غلط — المتسابق خطفها؟"
+            />
+          </p>
+        </div>
+        <div className="host-controls__row">
+          <button
+            type="button"
+            className="host-controls__award host-controls__award--a"
+            onClick={() => onStealResolve(true)}
+          >
+            ✓ <Bi en="Contestant Stole It (-1 Chaser)" ar="المتسابق خطفها (-1 للملاحق)" />
+          </button>
+          <button type="button" className="host-controls__strike" onClick={() => onStealResolve(false)}>
+            ✕ <Bi en="Contestant Missed Too" ar="المتسابق غلط برضو" />
+          </button>
+          <button type="button" onClick={onTogglePause} disabled={phase !== "playing"}>
+            {running ? <Bi en="⏸ Pause" ar="⏸ إيقاف مؤقت" /> : <Bi en="▶ Resume" ar="▶ استكمال" />}
+          </button>
+        </div>
       </div>
     );
   }

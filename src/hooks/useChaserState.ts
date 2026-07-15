@@ -5,6 +5,8 @@ import { playAward, playBuzzer, playDing, playTick, playTimeUp } from "../audio/
 interface ChaserState {
   phase: ChaserPhase;
   activeSide: ChaserSide | null;
+  turnOrder: ChaserSide[];
+  turnIndex: number;
   times: Record<ChaserSide, number>;
   configuredTimes: Record<ChaserSide, number>;
   scores: Record<ChaserSide, number>;
@@ -15,6 +17,7 @@ interface ChaserState {
   muted: boolean;
   flash: "correct" | "wrong" | null;
   winner: ChaserSide | null;
+  stealActive: boolean;
 }
 
 type Action =
@@ -22,6 +25,7 @@ type Action =
   | { type: "START"; firstSide: ChaserSide; order: number[] }
   | { type: "CORRECT"; nextIndex: number | null; nextPointer: number; nextOrder: number[] }
   | { type: "WRONG"; nextIndex: number | null; nextPointer: number; nextOrder: number[] }
+  | { type: "STEAL_RESOLVE"; stolen: boolean; nextIndex: number | null; nextPointer: number; nextOrder: number[] }
   | { type: "TICK" }
   | { type: "TOGGLE_PAUSE" }
   | { type: "RESET" }
@@ -33,6 +37,8 @@ const DEFAULT_TIME: Record<ChaserSide, number> = { contestant: 60, chaser: 60 };
 const initialState: ChaserState = {
   phase: "setup",
   activeSide: null,
+  turnOrder: [],
+  turnIndex: 0,
   times: { ...DEFAULT_TIME },
   configuredTimes: { ...DEFAULT_TIME },
   scores: { contestant: 0, chaser: 0 },
@@ -43,6 +49,7 @@ const initialState: ChaserState = {
   muted: false,
   flash: null,
   winner: null,
+  stealActive: false,
 };
 
 function otherSide(side: ChaserSide): ChaserSide {
@@ -56,11 +63,14 @@ function reducer(state: ChaserState, action: Action): ChaserState {
       const configuredTimes = { ...state.configuredTimes, [action.side]: action.seconds };
       return { ...state, configuredTimes, times: { ...configuredTimes } };
     }
-    case "START":
+    case "START": {
+      const turnOrder: ChaserSide[] = [action.firstSide, otherSide(action.firstSide)];
       return {
         ...state,
         phase: "playing",
-        activeSide: action.firstSide,
+        activeSide: turnOrder[0],
+        turnOrder,
+        turnIndex: 0,
         times: { ...state.configuredTimes },
         scores: { contestant: 0, chaser: 0 },
         running: true,
@@ -70,13 +80,12 @@ function reducer(state: ChaserState, action: Action): ChaserState {
         winner: null,
         flash: null,
       };
+    }
     case "CORRECT": {
-      if (state.phase !== "playing" || !state.activeSide) return state;
-      const nextSide = otherSide(state.activeSide);
+      if (state.phase !== "playing" || !state.activeSide || state.stealActive) return state;
       return {
         ...state,
         scores: { ...state.scores, [state.activeSide]: state.scores[state.activeSide] + 1 },
-        activeSide: nextSide,
         currentIndex: action.nextIndex,
         pointer: action.nextPointer,
         order: action.nextOrder,
@@ -84,7 +93,12 @@ function reducer(state: ChaserState, action: Action): ChaserState {
       };
     }
     case "WRONG": {
-      if (state.phase !== "playing") return state;
+      if (state.phase !== "playing" || state.stealActive) return state;
+      // When the chaser misses one, the contestant gets a shot at stealing it back —
+      // hold on the same question instead of advancing.
+      if (state.activeSide === "chaser") {
+        return { ...state, stealActive: true, flash: "wrong" };
+      }
       return {
         ...state,
         currentIndex: action.nextIndex,
@@ -93,17 +107,45 @@ function reducer(state: ChaserState, action: Action): ChaserState {
         flash: "wrong",
       };
     }
+    case "STEAL_RESOLVE": {
+      if (state.phase !== "playing" || !state.stealActive) return state;
+      const scores = action.stolen
+        ? { ...state.scores, chaser: Math.max(0, state.scores.chaser - 1) }
+        : state.scores;
+      return {
+        ...state,
+        scores,
+        stealActive: false,
+        currentIndex: action.nextIndex,
+        pointer: action.nextPointer,
+        order: action.nextOrder,
+        flash: action.stolen ? "correct" : "wrong",
+      };
+    }
     case "TICK": {
       if (state.phase !== "playing" || !state.running || !state.activeSide) return state;
       const remaining = Math.max(0, state.times[state.activeSide] - 1);
       const times = { ...state.times, [state.activeSide]: remaining };
       if (remaining === 0) {
+        const isLastTurn = state.turnIndex >= state.turnOrder.length - 1;
+        if (!isLastTurn) {
+          const nextSide = state.turnOrder[state.turnIndex + 1];
+          return {
+            ...state,
+            times,
+            activeSide: nextSide,
+            turnIndex: state.turnIndex + 1,
+          };
+        }
+        const { contestant, chaser } = state.scores;
+        const winner: ChaserSide = chaser >= contestant ? "chaser" : "contestant";
         return {
           ...state,
           times,
           phase: "over",
           running: false,
-          winner: otherSide(state.activeSide),
+          activeSide: null,
+          winner,
         };
       }
       return { ...state, times };
@@ -205,11 +247,27 @@ export function useChaserState(questions: ChaserQuestion[]) {
   }, [state.phase, nextQuestionInfo]);
 
   const wrong = useCallback(() => {
-    if (state.phase !== "playing") return;
+    if (state.phase !== "playing" || state.stealActive) return;
+    if (state.activeSide === "chaser") {
+      dispatch({ type: "WRONG", nextIndex: state.currentIndex, nextPointer: state.pointer, nextOrder: state.order });
+      playBuzzer();
+      return;
+    }
     const info = nextQuestionInfo();
     dispatch({ type: "WRONG", ...info });
     playBuzzer();
-  }, [state.phase, nextQuestionInfo]);
+  }, [state.phase, state.stealActive, state.activeSide, state.currentIndex, state.pointer, state.order, nextQuestionInfo]);
+
+  const stealResolve = useCallback(
+    (stolen: boolean) => {
+      if (state.phase !== "playing" || !state.stealActive) return;
+      const info = nextQuestionInfo();
+      dispatch({ type: "STEAL_RESOLVE", stolen, ...info });
+      if (stolen) playDing();
+      else playBuzzer();
+    },
+    [state.phase, state.stealActive, nextQuestionInfo],
+  );
 
   const togglePause = useCallback(() => dispatch({ type: "TOGGLE_PAUSE" }), []);
   const reset = useCallback(() => dispatch({ type: "RESET" }), []);
@@ -230,6 +288,7 @@ export function useChaserState(questions: ChaserQuestion[]) {
     start,
     correct,
     wrong,
+    stealResolve,
     togglePause,
     reset,
     toggleMute,

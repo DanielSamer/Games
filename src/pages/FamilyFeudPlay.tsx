@@ -11,6 +11,7 @@ import { Scoreboard } from "../components/Scoreboard";
 import { Strikes } from "../components/Strikes";
 import { Pot } from "../components/Pot";
 import { HostControls } from "../components/HostControls";
+import { EditableTitle } from "../components/EditableTitle";
 import { RoundManager } from "../components/RoundManager";
 import { setMuted } from "../audio/sounds";
 
@@ -144,9 +145,10 @@ export function FamilyFeudPlay() {
           onAdjust={(delta) => dispatch({ type: "ADJUST_SCORE", team: "A", delta })}
         />
         <div className="app-header__center">
-          <h1 className="app-title">
-            <Bi en="Church Feud" ar="عيلة وعيلة" />
-          </h1>
+          <EditableTitle
+            title={state.title}
+            onChange={(title) => dispatch({ type: "SET_TITLE", title })}
+          />
           <Pot pot={state.pot} />
         </div>
         <Scoreboard
