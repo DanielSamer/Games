@@ -95,3 +95,4 @@ Open a saved game, then click **"+ Create / Manage Rounds"** in the host control
 ## Adding The Chaser / Never Have I Ever for real
 
 Both currently render `<GameStub title="..." />` behind `RequireAuth` in `src/App.tsx`. To build one out: add its own Convex tables/functions (mirroring the `games` table pattern in `convex/games.ts` if it needs saved content), and swap its route's `element` from `GameStub` to a real page component.
+
