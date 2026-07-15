@@ -1,0 +1,12 @@
+[
+  { "id": "q1", "question": { "en": "What is the capital of France?", "ar": "ما هي عاصمة فرنسا؟" }, "answer": { "en": "Paris", "ar": "باريس" } },
+  { "id": "q2", "question": { "en": "How many continents are there on Earth?", "ar": "كم عدد قارات الأرض؟" }, "answer": { "en": "Seven", "ar": "سبعة" } },
+  { "id": "q3", "question": { "en": "Who painted the Mona Lisa?", "ar": "من رسم لوحة الموناليزا؟" }, "answer": { "en": "Leonardo da Vinci", "ar": "ليوناردو دافنشي" } },
+  { "id": "q4", "question": { "en": "What is the largest planet in our solar system?", "ar": "ما هو أكبر كوكب في مجموعتنا الشمسية؟" }, "answer": { "en": "Jupiter", "ar": "المشتري" } },
+  { "id": "q5", "question": { "en": "In what year did World War II end?", "ar": "في أي عام انتهت الحرب العالمية الثانية؟" }, "answer": { "en": "1945", "ar": "١٩٤٥" } },
+  { "id": "q6", "question": { "en": "What is the chemical symbol for gold?", "ar": "ما هو الرمز الكيميائي للذهب؟" }, "answer": { "en": "Au", "ar": "Au" } },
+  { "id": "q7", "question": { "en": "Which country is home to the kangaroo?", "ar": "أي دولة موطن الكنغر؟" }, "answer": { "en": "Australia", "ar": "أستراليا" } },
+  { "id": "q8", "question": { "en": "How many strings does a standard guitar have?", "ar": "كم عدد أوتار الجيتار العادي؟" }, "answer": { "en": "Six", "ar": "ستة" } },
+  { "id": "q9", "question": { "en": "What is the freezing point of water in Celsius?", "ar": "ما هي درجة تجمد الماء بالمئوية؟" }, "answer": { "en": "0 degrees", "ar": "صفر درجة" } },
+  { "id": "q10", "question": { "en": "Who wrote Romeo and Juliet?", "ar": "من كتب روميو وجولييت؟" }, "answer": { "en": "William Shakespeare", "ar": "ويليام شكسبير" } }
+]

@@ -1,0 +1,96 @@
+[
+  {
+    "id": "bible-book",
+    "question": { "en": "Favorite book of the Bible", "ar": "أكتر سفر في الكتاب المقدس بتحبه؟" },
+    "answers": [
+      { "text": { "en": "Psalms", "ar": "مزامير" }, "count": 5 },
+      { "text": { "en": "Proverbs", "ar": "أمثال" }, "count": 4 },
+      { "text": { "en": "Revelation", "ar": "الرؤيا" }, "count": 2 },
+      { "text": { "en": "John", "ar": "يوحنا" }, "count": 2 },
+      { "text": { "en": "1 Samuel", "ar": "صموئيل الأول" }, "count": 2 },
+      { "text": { "en": "Esther", "ar": "إستير" }, "count": 2 }
+    ]
+  },
+  {
+    "id": "superhero",
+    "question": { "en": "Which superhero would you trust to save you?", "ar": "مين أكتر بطل خارق تتخيل إنه يقدر ينقذك؟" },
+    "answers": [
+      { "text": { "en": "Spider-Man", "ar": "سبايدر مان" }, "count": 8 },
+      { "text": { "en": "Jesus / God", "ar": "يسوع" }, "count": 7 },
+      { "text": { "en": "Superman", "ar": "سوبرمان" }, "count": 3 },
+      { "text": { "en": "Batman", "ar": "باتمان" }, "count": 2 }
+    ]
+  },
+  {
+    "id": "food-once-a-year",
+    "question": { "en": "A food you only eat once a year", "ar": "أكلة بتاكلها مرة في السنة؟" },
+    "answers": [
+      { "text": { "en": "Taro", "ar": "قلقاس" }, "count": 5 },
+      { "text": { "en": "Fish", "ar": "سمك" }, "count": 4 },
+      { "text": { "en": "Feseekh", "ar": "فسيخ" }, "count": 1 },
+      { "text": { "en": "Grape leaves", "ar": "ورق عنب" }, "count": 1 },
+      { "text": { "en": "Cordon bleu", "ar": "كوردون بلو" }, "count": 1 }
+    ]
+  },
+  {
+    "id": "on-the-bus",
+    "question": { "en": "Something you do on the bus during a trip", "ar": "حاجة بتعملها وانت رايح رحلة في الباص؟" },
+    "answers": [
+      { "text": { "en": "Sleep", "ar": "بنام" }, "count": 10 },
+      { "text": { "en": "Listen to music", "ar": "بسمع أغاني" }, "count": 5 },
+      { "text": { "en": "Eat / snacks", "ar": "باكل" }, "count": 5 },
+      { "text": { "en": "Play games", "ar": "بلعب" }, "count": 3 },
+      { "text": { "en": "Sit with people I love", "ar": "بقعد جمب اللي بحبهم" }, "count": 2 }
+    ]
+  },
+  {
+    "id": "sunday-school-hymn",
+    "question": { "en": "First Sunday school hymn that comes to mind", "ar": "أول ترنيمة مدارس أحد جت في بالك؟" },
+    "answers": [
+      { "text": { "en": "Tool ma el-shams", "ar": "طول ما الشمس فيها نور" }, "count": 5 },
+      { "text": { "en": "In kont teheb Yasou'", "ar": "إن كنت تحب يسوع قول آمين" }, "count": 3 },
+      { "text": { "en": "Yasou' zay el-sokkar", "ar": "يسوع زي السكر" }, "count": 3 },
+      { "text": { "en": "Hetta haga helwa", "ar": "حتة حاجة حلوة" }, "count": 2 }
+    ]
+  },
+  {
+    "id": "day-or-night",
+    "question": { "en": "Bible time by day or by night?", "ar": "تاخد خلوتك الصبح ولا بالليل؟" },
+    "answers": [
+      { "text": { "en": "Day", "ar": "الصبح" }, "count": 20 },
+      { "text": { "en": "Night", "ar": "بالليل" }, "count": 5 }
+    ]
+  },
+  {
+    "id": "hot-or-cold-drink",
+    "question": { "en": "Cold water on a hot day, or something hot on a cold day?", "ar": "ماء ساقع في يوم حر ولا حاجة سخنة في يوم برد؟" },
+    "answers": [
+      { "text": { "en": "Cold water, hot day", "ar": "ماء ساقع، يوم حر" }, "count": 19 },
+      { "text": { "en": "Hot drink, cold day", "ar": "حاجة سخنة، يوم برد" }, "count": 6 }
+    ]
+  },
+  {
+    "id": "ahly-or-zamalek",
+    "question": { "en": "Ahly or Zamalek?", "ar": "بتشجع أهلي ولا زمالك؟" },
+    "answers": [
+      { "text": { "en": "Ahly", "ar": "أهلي" }, "count": 18 },
+      { "text": { "en": "Zamalek", "ar": "زمالك" }, "count": 7 }
+    ]
+  },
+  {
+    "id": "dont-lose",
+    "question": { "en": "What you'd least want to lose after a day out", "ar": "الحاجة اللي مش عايز تضيع منك في الخروجة؟" },
+    "answers": [
+      { "text": { "en": "Phone", "ar": "موبايل" }, "count": 20 },
+      { "text": { "en": "Wallet", "ar": "محفظة" }, "count": 5 }
+    ]
+  },
+  {
+    "id": "remove-instrument",
+    "question": { "en": "If one instrument had to be removed from all music", "ar": "لو هنشيل آلة موسيقية من كل الموسيقى؟" },
+    "answers": [
+      { "text": { "en": "Guitar", "ar": "جيتار" }, "count": 15 },
+      { "text": { "en": "Drums", "ar": "درمز" }, "count": 10 }
+    ]
+  }
+]
