@@ -1840,7 +1840,7 @@ body {
 /* Shared step board — one race track both sides fill; the chaser's colour is drawn
    on top so it visually overlaps/eats into the contestant's steps as it catches up. */
 .chaser-stepboard {
-  width: min(100%, 60rem);
+  width: 100%;
   margin: 1.25rem auto 0;
   display: flex;
   align-items: stretch;
@@ -1850,6 +1850,7 @@ body {
 .chaser-stepboard__track {
   flex: 1 1 auto;
   display: flex;
+  flex-wrap: wrap;
   gap: 3px;
   padding: 6px;
   border-radius: 0.6rem;
@@ -1859,16 +1860,16 @@ body {
 }
 
 .chaser-stepboard__cell {
-  flex: 1 1 0;
-  min-width: 0.6rem;
-  height: clamp(2.5rem, 6vw, 3.75rem);
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 2.5rem;
   border-radius: 0.3rem;
   background: linear-gradient(160deg, #2f4864, #1c2c3d);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Anton", "Cairo", sans-serif;
-  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.85);
   transition: background 0.25s, box-shadow 0.25s;
   position: relative;
@@ -1898,20 +1899,6 @@ body {
   100% {
     transform: scale(1);
   }
-}
-
-.chaser-stepboard__total {
-  flex: 0 0 auto;
-  width: clamp(2.75rem, 6vw, 4rem);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 0.5rem;
-  border: 2px solid var(--gold-dark);
-  background: linear-gradient(160deg, #26161a, var(--suit-charcoal-dark) 80%);
-  color: var(--gold);
-  font-family: "Anton", "Cairo", sans-serif;
-  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
 /* Question card — same tailored charcoal pinstripe, gold-piped like a lapel */
