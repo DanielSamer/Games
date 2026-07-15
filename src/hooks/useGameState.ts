@@ -47,7 +47,7 @@ const initialState: GameState = {
   primaryLang: "ar",
   muted: false,
   strikeFlash: false,
-  title: "Family Feud",
+  title: "Sa2alna El Nas",
 };
 
 function sortedAnswers(round: Round | undefined) {

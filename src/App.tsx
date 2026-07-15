@@ -51,7 +51,7 @@ function App() {
         path="/never-have-i-ever"
         element={
           <RequireAuth>
-            <GameStub title="Never Have I Ever" titleAr="أبداً ما عملت" theme="nhie" />
+            <GameStub title="3omry Ma" titleAr="أبداً ما عملت" theme="nhie" />
           </RequireAuth>
         }
       />

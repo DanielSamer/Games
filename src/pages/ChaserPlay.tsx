@@ -136,7 +136,7 @@ export function ChaserPlay() {
         />
         <div className="app-header__center">
           <h1 className="app-title chaser-title">
-            <Bi en="Beat the Chasers" ar="اهزم الملاحقين" />
+            <Bi en="El7a2o" ar="اهزم الملاحقين" />
           </h1>
           {state.phase === "over" && (
             <p className="chaser-winner-banner">
