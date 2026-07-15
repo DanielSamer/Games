@@ -32,7 +32,7 @@ const shows: ShowCardData[] = [
   {
     id: "nhie",
     to: "/never-have-i-ever",
-    accent: "#d6f24e",
+    accent: "#ec4899",
     titleLinesEn: ["Never", "Have I Ever"],
     nameAr: "أبداً ما عملت",
     descEn: "Confess, laugh, and put a finger down.",

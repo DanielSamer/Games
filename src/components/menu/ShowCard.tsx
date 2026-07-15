@@ -71,9 +71,6 @@ export function ShowCard({ show, dimmed, style, onHoverChange }: Props) {
               </span>
             )}
           </span>
-          <span className="show-card__arrow" aria-hidden="true">
-            →
-          </span>
         </div>
       </div>
     </Link>
