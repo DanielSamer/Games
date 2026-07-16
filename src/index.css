@@ -551,6 +551,46 @@ body {
   font-size: 0.9rem;
 }
 
+.chaser-import {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.chaser-import__hint {
+  margin: 0 0 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.chaser-import__result {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.chaser-import__ok {
+  margin: 0 0 0.4rem;
+  color: #6ee7a8;
+  font-weight: 600;
+}
+
+.chaser-import__warnings summary {
+  cursor: pointer;
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+.chaser-import__warnings ul {
+  margin: 0.5rem 0 0;
+  padding-inline-start: 1.2rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.82rem;
+  max-height: 8rem;
+  overflow-y: auto;
+}
+
 .round-form__row {
   display: grid;
   grid-template-columns: 1fr 1fr;
