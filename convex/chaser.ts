@@ -104,6 +104,17 @@ export const removeQuestion = mutation({
   },
 });
 
+export const importQuestions = mutation({
+  args: { gameId: v.id("chaserGames"), questions: v.array(chaserQuestion) },
+  handler: async (ctx, { gameId, questions: incoming }) => {
+    const userId = await getAuthUserId(ctx);
+    const game = await ctx.db.get(gameId);
+    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
+    await ctx.db.patch(gameId, { questions: [...game.questions, ...incoming] });
+    return incoming.length;
+  },
+});
+
 export const ensureSeeded = mutation({
   args: { name: v.string(), questions: v.array(chaserQuestion) },
   handler: async (ctx, { name, questions }) => {

@@ -20,6 +20,7 @@ export function ChaserLobby() {
   const addQuestion = useMutation(api.chaser.addQuestion);
   const updateQuestion = useMutation(api.chaser.updateQuestion);
   const removeQuestion = useMutation(api.chaser.removeQuestion);
+  const importQuestions = useMutation(api.chaser.importQuestions);
   const ensureSeeded = useMutation(api.chaser.ensureSeeded);
 
   const [newName, setNewName] = useState("");
@@ -166,6 +167,9 @@ export function ChaserLobby() {
         }
         onRemoveQuestion={(questionId) =>
           void removeQuestion({ gameId: editingGame!._id, questionId })
+        }
+        onImportQuestions={(imported) =>
+          void importQuestions({ gameId: editingGame!._id, questions: imported })
         }
       />
     </div>

@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { ChaserQuestion } from "../../types/chaser";
+import { parseChaserDocx } from "../../utils/parseChaserDocx";
 import { Bi } from "../Bi";
 
 interface Props {
@@ -9,6 +10,12 @@ interface Props {
   onAddQuestion: (question: ChaserQuestion) => void;
   onUpdateQuestion: (question: ChaserQuestion) => void;
   onRemoveQuestion: (id: string) => void;
+  onImportQuestions?: (questions: ChaserQuestion[]) => void;
+}
+
+interface ImportResult {
+  added: number;
+  warnings: string[];
 }
 
 function slugify(text: string): string {
@@ -26,6 +33,7 @@ export function ChaserQuestionManager({
   onAddQuestion,
   onUpdateQuestion,
   onRemoveQuestion,
+  onImportQuestions,
 }: Props) {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [questionEn, setQuestionEn] = useState("");
@@ -33,8 +41,43 @@ export function ChaserQuestionManager({
   const [answerEn, setAnswerEn] = useState("");
   const [answerAr, setAnswerAr] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [importing, setImporting] = useState(false);
+  const [importResult, setImportResult] = useState<ImportResult | null>(null);
+  const [importError, setImportError] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   if (!open) return null;
+
+  const handleImportFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file later
+    if (!file) return;
+
+    setImporting(true);
+    setImportResult(null);
+    setImportError(null);
+    try {
+      const { questions: parsed, warnings } = await parseChaserDocx(file);
+      if (parsed.length === 0) {
+        setImportError(
+          warnings.length > 0
+            ? "Couldn't read any questions. Each line should be 'Question? Answer'."
+            : "That file appears to be empty.",
+        );
+        return;
+      }
+      if (onImportQuestions) {
+        onImportQuestions(parsed);
+      } else {
+        parsed.forEach((q) => onAddQuestion(q));
+      }
+      setImportResult({ added: parsed.length, warnings });
+    } catch {
+      setImportError("Could not read that file. Please upload a valid Word (.docx) file.");
+    } finally {
+      setImporting(false);
+    }
+  };
 
   const resetForm = () => {
     setEditingId(null);
@@ -97,6 +140,63 @@ export function ChaserQuestionManager({
         </div>
 
         <div className="modal__body">
+          <section className="modal__section chaser-import">
+            <h3>
+              <Bi en="Import from Word" ar="استيراد من Word" />
+            </h3>
+            <p className="chaser-import__hint">
+              <Bi
+                en="Upload a .docx file with one question per line, written as “Question? Answer”. Arabic lines are detected automatically."
+                ar="ارفع ملف ‎.docx‎ فيه كل سؤال في سطر بالشكل: «السؤال؟ الإجابة». الأسطر العربية بتتحدد تلقائيًا."
+              />
+            </p>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept=".docx"
+              style={{ display: "none" }}
+              onChange={(e) => void handleImportFile(e)}
+            />
+            <button
+              type="button"
+              className="round-form__save"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={importing}
+            >
+              {importing ? (
+                <Bi en="Importing…" ar="جاري الاستيراد..." />
+              ) : (
+                <Bi en="Choose Word file" ar="اختر ملف Word" />
+              )}
+            </button>
+            {importResult && (
+              <div className="chaser-import__result">
+                <p className="chaser-import__ok">
+                  <Bi
+                    en={`Imported ${importResult.added} question(s).`}
+                    ar={`تم استيراد ${importResult.added} سؤال.`}
+                  />
+                </p>
+                {importResult.warnings.length > 0 && (
+                  <details className="chaser-import__warnings">
+                    <summary>
+                      <Bi
+                        en={`${importResult.warnings.length} line(s) skipped (no “? answer” found)`}
+                        ar={`${importResult.warnings.length} سطر تم تخطيه (مفيش «؟ إجابة»)`}
+                      />
+                    </summary>
+                    <ul>
+                      {importResult.warnings.map((w, i) => (
+                        <li key={i}>{w}</li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
+              </div>
+            )}
+            {importError && <p className="round-form__error">{importError}</p>}
+          </section>
+
           <section className="modal__section">
             <h3>
               {editingId ? (

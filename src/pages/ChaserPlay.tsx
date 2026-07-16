@@ -18,6 +18,7 @@ export function ChaserPlay() {
   const addQuestion = useMutation(api.chaser.addQuestion);
   const updateQuestion = useMutation(api.chaser.updateQuestion);
   const removeQuestion = useMutation(api.chaser.removeQuestion);
+  const importQuestions = useMutation(api.chaser.importQuestions);
 
   const questions = game?.questions ?? [];
   const {
@@ -221,6 +222,9 @@ export function ChaserPlay() {
         onUpdateQuestion={(question) => void updateQuestion({ gameId: gameId as Id<"chaserGames">, question })}
         onRemoveQuestion={(questionId) =>
           void removeQuestion({ gameId: gameId as Id<"chaserGames">, questionId })
+        }
+        onImportQuestions={(imported) =>
+          void importQuestions({ gameId: gameId as Id<"chaserGames">, questions: imported })
         }
       />
     </div>
