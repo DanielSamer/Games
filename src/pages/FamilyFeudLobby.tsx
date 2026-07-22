@@ -27,6 +27,11 @@ export function FamilyFeudLobby() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
   const [editingRoundsId, setEditingRoundsId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  function errorMessage(err: unknown) {
+    return err instanceof Error ? err.message : "Something went wrong. Please try again.";
+  }
 
   const startEditing = (gameId: string, currentName: string) => {
     setEditingId(gameId);
@@ -37,7 +42,11 @@ export function FamilyFeudLobby() {
     const trimmed = editingName.trim();
     setEditingId(null);
     if (trimmed.length > 0 && trimmed !== currentName) {
-      await renameGame({ gameId: gameId as Id<"games">, name: trimmed });
+      try {
+        await renameGame({ gameId: gameId as Id<"games">, name: trimmed });
+      } catch (err) {
+        setError(errorMessage(err));
+      }
     }
   };
 
@@ -53,8 +62,20 @@ export function FamilyFeudLobby() {
   const handleCreate = async () => {
     const name = newName.trim();
     if (!name) return;
-    await createGame({ name, rounds: [] });
-    setNewName("");
+    try {
+      await createGame({ name, rounds: [] });
+      setNewName("");
+    } catch (err) {
+      setError(errorMessage(err));
+    }
+  };
+
+  const handleRemove = async (gameId: Id<"games">) => {
+    try {
+      await removeGame({ gameId });
+    } catch (err) {
+      setError(errorMessage(err));
+    }
   };
 
   const namePlaceholder =
@@ -142,7 +163,7 @@ export function FamilyFeudLobby() {
                   <button
                     type="button"
                     className="lobby-list__delete"
-                    onClick={() => void removeGame({ gameId: game._id })}
+                    onClick={() => void handleRemove(game._id)}
                   >
                     <Bi en="Delete" ar="حذف" />
                   </button>
@@ -151,15 +172,27 @@ export function FamilyFeudLobby() {
             )}
           </ul>
         )}
+
+        {error && (
+          <p className="menu-auth-error" role="alert">
+            {error}
+          </p>
+        )}
       </div>
 
       <RoundManager
         open={editingGame !== null}
         onClose={() => setEditingRoundsId(null)}
         rounds={editingGame?.rounds ?? []}
-        onAddRound={(round) => void addRound({ gameId: editingGame!._id, round })}
-        onUpdateRound={(round) => void updateRound({ gameId: editingGame!._id, round })}
-        onRemoveRound={(roundId) => void removeRound({ gameId: editingGame!._id, roundId })}
+        onAddRound={(round) =>
+          void addRound({ gameId: editingGame!._id, round }).catch((err) => setError(errorMessage(err)))
+        }
+        onUpdateRound={(round) =>
+          void updateRound({ gameId: editingGame!._id, round }).catch((err) => setError(errorMessage(err)))
+        }
+        onRemoveRound={(roundId) =>
+          void removeRound({ gameId: editingGame!._id, roundId }).catch((err) => setError(errorMessage(err)))
+        }
       />
     </div>
   );

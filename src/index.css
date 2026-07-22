@@ -1181,9 +1181,12 @@ body {
 .show-card__name-ar {
   position: relative;
   z-index: 1;
+  margin: 0;
+  display: block;
   font-family: "Cairo", sans-serif;
-  font-weight: 700;
-  font-size: 1rem;
+  font-weight: 800;
+  font-size: 1.9rem;
+  line-height: 1.15;
 }
 
 /* Info strip — consistent across all cards */
@@ -1277,7 +1280,13 @@ body {
 }
 
 .show-card--feud .show-card__name-ar {
-  color: #ffe4a3;
+  font-weight: 800;
+  font-size: 1.85rem;
+  background: linear-gradient(180deg, #fff3c4 0%, #f6b93b 45%, #c9781a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.55));
 }
 
 /* The Chase — dark red, motion streaks, chrome type */
@@ -1311,7 +1320,16 @@ body {
 }
 
 .show-card--chaser .show-card__name-ar {
-  color: #f2c2c6;
+  font-weight: 700;
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+  transform: skewX(-8deg);
+  transform-origin: right center;
+  background: linear-gradient(180deg, #ffffff 0%, #c3ccd6 45%, #838d99 55%, #ffffff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  filter: drop-shadow(2px 3px 1px rgba(0, 0, 0, 0.7));
 }
 
 /* Never Have I Ever — flat magenta, marker script */
@@ -1330,7 +1348,12 @@ body {
 }
 
 .show-card--nhie .show-card__name-ar {
-  color: #f3d9e5;
+  font-weight: 800;
+  font-size: 1.6rem;
+  color: #d6f24e;
+  transform: rotate(-3deg);
+  transform-origin: right center;
+  text-shadow: 1px 2px 0 rgba(0, 0, 0, 0.25);
 }
 
 @media (max-width: 639px) {

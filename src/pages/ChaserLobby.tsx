@@ -28,6 +28,11 @@ export function ChaserLobby() {
   const [editingNameId, setEditingNameId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
   const [editingQuestionsId, setEditingQuestionsId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  function errorMessage(err: unknown) {
+    return err instanceof Error ? err.message : "Something went wrong. Please try again.";
+  }
 
   const startEditingName = (gameId: string, currentName: string) => {
     setEditingNameId(gameId);
@@ -38,7 +43,11 @@ export function ChaserLobby() {
     const trimmed = editingName.trim();
     setEditingNameId(null);
     if (trimmed.length > 0 && trimmed !== currentName) {
-      await renameGame({ gameId: gameId as Id<"chaserGames">, name: trimmed });
+      try {
+        await renameGame({ gameId: gameId as Id<"chaserGames">, name: trimmed });
+      } catch (err) {
+        setError(errorMessage(err));
+      }
     }
   };
 
@@ -54,8 +63,20 @@ export function ChaserLobby() {
   const handleCreate = async () => {
     const name = newName.trim();
     if (!name) return;
-    await createGame({ name, questions: [] });
-    setNewName("");
+    try {
+      await createGame({ name, questions: [] });
+      setNewName("");
+    } catch (err) {
+      setError(errorMessage(err));
+    }
+  };
+
+  const handleRemove = async (gameId: Id<"chaserGames">) => {
+    try {
+      await removeGame({ gameId });
+    } catch (err) {
+      setError(errorMessage(err));
+    }
   };
 
   const namePlaceholder =
@@ -144,7 +165,7 @@ export function ChaserLobby() {
                   <button
                     type="button"
                     className="lobby-list__delete"
-                    onClick={() => void removeGame({ gameId: game._id })}
+                    onClick={() => void handleRemove(game._id)}
                   >
                     <Bi en="Delete" ar="حذف" />
                   </button>
@@ -153,6 +174,12 @@ export function ChaserLobby() {
             )}
           </ul>
         )}
+
+        {error && (
+          <p className="menu-auth-error" role="alert">
+            {error}
+          </p>
+        )}
       </div>
 
       <ChaserQuestionManager
@@ -160,16 +187,18 @@ export function ChaserLobby() {
         onClose={() => setEditingQuestionsId(null)}
         questions={editingGame?.questions ?? []}
         onAddQuestion={(question) =>
-          void addQuestion({ gameId: editingGame!._id, question })
+          void addQuestion({ gameId: editingGame!._id, question }).catch((err) => setError(errorMessage(err)))
         }
         onUpdateQuestion={(question) =>
-          void updateQuestion({ gameId: editingGame!._id, question })
+          void updateQuestion({ gameId: editingGame!._id, question }).catch((err) => setError(errorMessage(err)))
         }
         onRemoveQuestion={(questionId) =>
-          void removeQuestion({ gameId: editingGame!._id, questionId })
+          void removeQuestion({ gameId: editingGame!._id, questionId }).catch((err) => setError(errorMessage(err)))
         }
         onImportQuestions={(imported) =>
-          void importQuestions({ gameId: editingGame!._id, questions: imported })
+          void importQuestions({ gameId: editingGame!._id, questions: imported }).catch((err) =>
+            setError(errorMessage(err)),
+          )
         }
       />
     </div>

@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { MainMenu } from "./pages/MainMenu";
 import { AuthPage } from "./pages/AuthPage";
+import { ForgotPasswordPage } from "./pages/ForgotPasswordPage";
 import { FamilyFeudLobby } from "./pages/FamilyFeudLobby";
 import { FamilyFeudPlay } from "./pages/FamilyFeudPlay";
 import { ChaserLobby } from "./pages/ChaserLobby";
@@ -14,6 +15,7 @@ function App() {
       <Route path="/" element={<MainMenu />} />
       <Route path="/sign-in" element={<AuthPage mode="signIn" />} />
       <Route path="/sign-up" element={<AuthPage mode="signUp" />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       <Route
         path="/family-feud"

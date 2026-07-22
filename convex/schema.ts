@@ -38,4 +38,10 @@ export default defineSchema({
     name: v.string(),
     questions: v.array(chaserQuestion),
   }).index("by_owner", ["ownerId"]),
+
+  signInAttempts: defineTable({
+    email: v.string(),
+    count: v.number(),
+    windowStart: v.number(),
+  }).index("by_email", ["email"]),
 });

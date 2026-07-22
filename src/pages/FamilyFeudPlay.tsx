@@ -44,12 +44,11 @@ export function FamilyFeudPlay() {
   }, [state.muted]);
 
   useEffect(() => {
-    const effectiveLang = siteLangMode === "en" ? "en" : state.primaryLang;
-    document.documentElement.dir = effectiveLang === "ar" ? "rtl" : "ltr";
+    document.documentElement.dir = siteLangMode === "ar" ? "rtl" : "ltr";
     return () => {
       document.documentElement.dir = "ltr";
     };
-  }, [state.primaryLang, siteLangMode]);
+  }, [siteLangMode]);
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
@@ -191,7 +190,6 @@ export function FamilyFeudPlay() {
           roundIndex={roundIndex}
           teamNames={{ A: state.teams.A.name, B: state.teams.B.name }}
           strikes={state.strikes}
-          primaryLang={state.primaryLang}
           muted={state.muted}
           onStrike={strike}
           onAward={award}
@@ -200,7 +198,6 @@ export function FamilyFeudPlay() {
           onGoto={gotoRound}
           onResetRound={() => dispatch({ type: "RESET_ROUND" })}
           onResetGame={() => dispatch({ type: "RESET_GAME" })}
-          onToggleLang={() => dispatch({ type: "TOGGLE_LANG" })}
           onToggleMute={() => dispatch({ type: "TOGGLE_MUTE" })}
           onManageRounds={() => setRoundManagerOpen(true)}
         />

@@ -5,6 +5,7 @@ import { useAuthActions } from "@convex-dev/auth/react";
 import { useLanguageMode } from "../context/LanguageMode";
 import { MenuBackground } from "../components/menu/MenuBackground";
 import { ShowCard, type ShowCardData } from "../components/menu/ShowCard";
+import { TopBar } from "../components/menu/TopBar";
 
 const shows: ShowCardData[] = [
   {
@@ -45,8 +46,8 @@ const shows: ShowCardData[] = [
 export function MainMenu() {
   const { isAuthenticated } = useConvexAuth();
   const { signOut } = useAuthActions();
-  const { mode, setMode } = useLanguageMode();
-  const bilingual = mode === "bilingual";
+  const { mode } = useLanguageMode();
+  const isAr = mode === "ar";
   const [hoveredId, setHoveredId] = useState<ShowCardData["id"] | null>(null);
 
   const hoveredShow = shows.find((s) => s.id === hoveredId) ?? null;
@@ -55,50 +56,30 @@ export function MainMenu() {
     <div className="menu-shell">
       <MenuBackground accent={hoveredShow?.accent ?? null} />
 
-      <div className="menu-topbar">
-        <span className="menu-masthead">Games</span>
-
-        <div className="menu-topbar__right">
-          <div className="menu-lang" role="group" aria-label="Site language">
-            <button
-              type="button"
-              className={`menu-lang__opt ${mode === "en" ? "menu-lang__opt--active" : ""}`}
-              onClick={() => setMode("en")}
-            >
-              EN
-            </button>
-            <span className="menu-lang__sep">·</span>
-            <button
-              type="button"
-              className={`menu-lang__opt ${bilingual ? "menu-lang__opt--active" : ""}`}
-              onClick={() => setMode("bilingual")}
-            >
-              EN+AR
-            </button>
-          </div>
-
-          {isAuthenticated ? (
+      <TopBar
+        masthead={<span className="menu-masthead">Games</span>}
+        right={
+          isAuthenticated ? (
             <button type="button" className="menu-signout" onClick={() => void signOut()}>
-              {bilingual ? "تسجيل خروج / Sign out" : "Sign out"}
+              {isAr ? "تسجيل خروج" : "Sign out"}
             </button>
           ) : (
             <Link to="/sign-in" className="menu-signout">
-              {bilingual ? "تسجيل دخول / Sign in" : "Sign in"}
+              {isAr ? "تسجيل دخول" : "Sign in"}
             </Link>
-          )}
-        </div>
-      </div>
+          )
+        }
+      />
 
       <div className="menu-content">
         <p className="menu-eyebrow">
-          {bilingual ? (
+          {isAr ? (
             <span dir="rtl" lang="ar">
               عروض الليلة
             </span>
           ) : (
             "Tonight's shows"
           )}
-          {bilingual && <span className="menu-eyebrow__ar">Tonight's shows</span>}
         </p>
 
         <div className="menu-grid">

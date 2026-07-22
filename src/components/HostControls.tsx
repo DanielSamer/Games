@@ -1,12 +1,10 @@
 import type { Round, TeamId } from "../types/game";
-import { useLanguageMode } from "../context/LanguageMode";
 
 interface Props {
   rounds: Round[];
   roundIndex: number;
   teamNames: Record<TeamId, string>;
   strikes: number;
-  primaryLang: "en" | "ar";
   muted: boolean;
   onStrike: () => void;
   onAward: (team: TeamId) => void;
@@ -15,7 +13,6 @@ interface Props {
   onGoto: (index: number) => void;
   onResetRound: () => void;
   onResetGame: () => void;
-  onToggleLang: () => void;
   onToggleMute: () => void;
   onManageRounds: () => void;
 }
@@ -25,7 +22,6 @@ export function HostControls({
   roundIndex,
   teamNames,
   strikes,
-  primaryLang,
   muted,
   onStrike,
   onAward,
@@ -34,12 +30,9 @@ export function HostControls({
   onGoto,
   onResetRound,
   onResetGame,
-  onToggleLang,
   onToggleMute,
   onManageRounds,
 }: Props) {
-  const { mode: siteLangMode } = useLanguageMode();
-
   return (
     <div className="host-controls">
       <div className="host-controls__row">
@@ -86,11 +79,6 @@ export function HostControls({
       </div>
 
       <div className="host-controls__row">
-        {siteLangMode === "bilingual" && (
-          <button type="button" onClick={onToggleLang}>
-            Language: {primaryLang === "en" ? "EN" : "AR"}
-          </button>
-        )}
         <button type="button" onClick={onToggleMute}>
           {muted ? "🔇 Muted" : "🔊 Sound On"}
         </button>

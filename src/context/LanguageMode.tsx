@@ -1,15 +1,15 @@
 import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
-export type LanguageMode = "en" | "bilingual";
+export type LanguageMode = "en" | "ar";
 
 const STORAGE_KEY = "e3dady-language-mode";
 
 function loadMode(): LanguageMode {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    return raw === "en" || raw === "bilingual" ? raw : "bilingual";
+    return raw === "en" || raw === "ar" ? raw : "en";
   } catch {
-    return "bilingual";
+    return "en";
   }
 }
 

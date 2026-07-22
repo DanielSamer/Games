@@ -1,9 +1,11 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuthActions } from "@convex-dev/auth/react";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { Bi } from "../components/Bi";
-import { useLanguageMode } from "../context/LanguageMode";
 import { MenuBackground } from "../components/menu/MenuBackground";
+import { TopBar } from "../components/menu/TopBar";
 
 interface Props {
   mode: "signIn" | "signUp";
@@ -13,8 +15,9 @@ export function AuthPage({ mode }: Props) {
   const { signIn } = useAuthActions();
   const navigate = useNavigate();
   const location = useLocation();
-  const { mode: siteLangMode, setMode: setSiteLangMode } = useLanguageMode();
-  const bilingual = siteLangMode === "bilingual";
+  const assertSignInAllowed = useMutation(api.rateLimit.assertSignInAllowed);
+  const recordFailedSignIn = useMutation(api.rateLimit.recordFailedSignIn);
+  const clearSignInAttempts = useMutation(api.rateLimit.clearSignInAttempts);
   const redirectTo = (location.state as { from?: string } | null)?.from ?? "/";
 
   const [email, setEmail] = useState("");
@@ -27,21 +30,26 @@ export function AuthPage({ mode }: Props) {
     setError(null);
     setSubmitting(true);
     try {
+      if (mode === "signIn") {
+        try {
+          await assertSignInAllowed({ email });
+        } catch (lockErr) {
+          setError(lockErr instanceof Error ? lockErr.message : "Too many attempts. Try again later.");
+          return;
+        }
+      }
       await signIn("password", { email, password, flow: mode });
+      if (mode === "signIn") await clearSignInAttempts({ email });
       navigate(redirectTo, { replace: true });
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Auth error:", err);
-      const message = err instanceof Error ? err.message : String(err);
-      const looksLikeDuplicateAccount = /already.*(exist|use)/i.test(message);
-      const looksLikeBadCredentials = /invalid|password|not found/i.test(message);
-
-      if (mode === "signUp" && looksLikeDuplicateAccount) {
-        setError("That email is already in use.");
-      } else if (mode === "signIn" && looksLikeBadCredentials) {
+      if (mode === "signIn") {
+        await recordFailedSignIn({ email });
         setError("Couldn't sign in. Check your email and password.");
       } else {
-        setError(`Something went wrong: ${message}`);
+        // Deliberately generic: don't reveal whether this email is already registered.
+        setError("Couldn't create your account. If you already have one, try signing in instead.");
       }
     } finally {
       setSubmitting(false);
@@ -52,31 +60,13 @@ export function AuthPage({ mode }: Props) {
     <div className="menu-shell">
       <MenuBackground accent={null} />
 
-      <div className="menu-topbar">
-        <Link to="/" className="menu-masthead" style={{ textDecoration: "none" }}>
-          Games
-        </Link>
-
-        <div className="menu-topbar__right">
-          <div className="menu-lang" role="group" aria-label="Site language">
-            <button
-              type="button"
-              className={`menu-lang__opt ${siteLangMode === "en" ? "menu-lang__opt--active" : ""}`}
-              onClick={() => setSiteLangMode("en")}
-            >
-              EN
-            </button>
-            <span className="menu-lang__sep">·</span>
-            <button
-              type="button"
-              className={`menu-lang__opt ${bilingual ? "menu-lang__opt--active" : ""}`}
-              onClick={() => setSiteLangMode("bilingual")}
-            >
-              EN+AR
-            </button>
-          </div>
-        </div>
-      </div>
+      <TopBar
+        masthead={
+          <Link to="/" className="menu-masthead" style={{ textDecoration: "none" }}>
+            Games
+          </Link>
+        }
+      />
 
       <div className="menu-content menu-content--center">
         <form className="menu-auth-card" onSubmit={handleSubmit}>
@@ -136,6 +126,10 @@ export function AuthPage({ mode }: Props) {
                 <Bi en="Don't have an account?" ar="معندكش حساب؟" />{" "}
                 <Link to="/sign-up" state={{ from: redirectTo }}>
                   <Bi en="Sign up" ar="سجّل" />
+                </Link>
+                {" · "}
+                <Link to="/forgot-password">
+                  <Bi en="Forgot password?" ar="نسيت كلمة المرور؟" />
                 </Link>
               </>
             ) : (

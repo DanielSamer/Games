@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { getOwnedGame, assertValidName, assertValidRounds } from "./model";
 
 const localizedText = v.object({
   en: v.optional(v.string()),
@@ -47,6 +48,8 @@ export const create = mutation({
   handler: async (ctx, { name, rounds }) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Not signed in");
+    assertValidName(name);
+    assertValidRounds(rounds ?? []);
     return await ctx.db.insert("games", {
       ownerId: userId,
       name,
@@ -59,8 +62,8 @@ export const rename = mutation({
   args: { gameId: v.id("games"), name: v.string() },
   handler: async (ctx, { gameId, name }) => {
     const userId = await getAuthUserId(ctx);
-    const game = await ctx.db.get(gameId);
-    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
+    await getOwnedGame(ctx, userId, gameId);
+    assertValidName(name);
     await ctx.db.patch(gameId, { name });
   },
 });
@@ -69,8 +72,7 @@ export const remove = mutation({
   args: { gameId: v.id("games") },
   handler: async (ctx, { gameId }) => {
     const userId = await getAuthUserId(ctx);
-    const game = await ctx.db.get(gameId);
-    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
+    await getOwnedGame(ctx, userId, gameId);
     await ctx.db.delete(gameId);
   },
 });
@@ -79,9 +81,10 @@ export const addRound = mutation({
   args: { gameId: v.id("games"), round },
   handler: async (ctx, { gameId, round: newRound }) => {
     const userId = await getAuthUserId(ctx);
-    const game = await ctx.db.get(gameId);
-    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
-    await ctx.db.patch(gameId, { rounds: [...game.rounds, newRound] });
+    const game = await getOwnedGame(ctx, userId, gameId);
+    const rounds = [...game.rounds, newRound];
+    assertValidRounds(rounds);
+    await ctx.db.patch(gameId, { rounds });
   },
 });
 
@@ -89,11 +92,10 @@ export const updateRound = mutation({
   args: { gameId: v.id("games"), round },
   handler: async (ctx, { gameId, round: updated }) => {
     const userId = await getAuthUserId(ctx);
-    const game = await ctx.db.get(gameId);
-    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
-    await ctx.db.patch(gameId, {
-      rounds: game.rounds.map((r) => (r.id === updated.id ? updated : r)),
-    });
+    const game = await getOwnedGame(ctx, userId, gameId);
+    const rounds = game.rounds.map((r) => (r.id === updated.id ? updated : r));
+    assertValidRounds(rounds);
+    await ctx.db.patch(gameId, { rounds });
   },
 });
 
@@ -101,8 +103,7 @@ export const removeRound = mutation({
   args: { gameId: v.id("games"), roundId: v.string() },
   handler: async (ctx, { gameId, roundId }) => {
     const userId = await getAuthUserId(ctx);
-    const game = await ctx.db.get(gameId);
-    if (!userId || !game || game.ownerId !== userId) throw new Error("Not found");
+    const game = await getOwnedGame(ctx, userId, gameId);
     await ctx.db.patch(gameId, {
       rounds: game.rounds.filter((r) => r.id !== roundId),
     });

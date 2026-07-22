@@ -23,7 +23,7 @@ interface Props {
 
 export function ShowCard({ show, dimmed, style, onHoverChange }: Props) {
   const { mode } = useLanguageMode();
-  const bilingual = mode === "bilingual";
+  const isAr = mode === "ar";
   const cardStyle = { ...style, "--accent": show.accent } as CSSProperties;
 
   return (
@@ -38,38 +38,29 @@ export function ShowCard({ show, dimmed, style, onHoverChange }: Props) {
     >
       <div className="show-card__marquee">
         <span className="show-card__marquee-texture" aria-hidden="true" />
-        <h3 className="show-card__wordmark">
-          {show.titleLinesEn.map((line) => (
-            <span className="show-card__wordmark-line" key={line}>
-              {line}
-            </span>
-          ))}
-        </h3>
-        {bilingual && (
+        {isAr ? (
           <span className="show-card__name-ar" dir="rtl" lang="ar">
             {show.nameAr}
           </span>
+        ) : (
+          <h3 className="show-card__wordmark">
+            {show.titleLinesEn.map((line) => (
+              <span className="show-card__wordmark-line" key={line}>
+                {line}
+              </span>
+            ))}
+          </h3>
         )}
       </div>
 
       <div className="show-card__info">
-        <p className="show-card__desc" dir={bilingual ? "rtl" : "ltr"} lang={bilingual ? "ar" : "en"}>
-          {bilingual ? show.descAr : show.descEn}
-          {bilingual && (
-            <span className="show-card__desc-ar" dir="ltr" lang="en">
-              {show.descEn}
-            </span>
-          )}
+        <p className="show-card__desc" dir={isAr ? "rtl" : "ltr"} lang={isAr ? "ar" : "en"}>
+          {isAr ? show.descAr : show.descEn}
         </p>
 
         <div className="show-card__footer">
-          <span className="show-card__tag" dir={bilingual ? "rtl" : "ltr"} lang={bilingual ? "ar" : "en"}>
-            {bilingual ? show.tagAr : show.tagEn}
-            {bilingual && (
-              <span className="show-card__tag-ar" dir="ltr" lang="en">
-                {show.tagEn}
-              </span>
-            )}
+          <span className="show-card__tag" dir={isAr ? "rtl" : "ltr"} lang={isAr ? "ar" : "en"}>
+            {isAr ? show.tagAr : show.tagEn}
           </span>
         </div>
       </div>
