@@ -6,7 +6,7 @@ import nodemailer from "nodemailer";
 
 export const sendPasswordResetEmail = internalAction({
   args: { to: v.string(), code: v.string() },
-  handler: async (ctx, { to, code }) => {
+  handler: async (_ctx, { to, code }) => {
     const user = process.env.GMAIL_USER;
     const pass = process.env.GMAIL_APP_PASSWORD;
     if (!user || !pass) {
