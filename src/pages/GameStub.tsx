@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Sparkles } from "lucide-react";
 import { Bi } from "../components/Bi";
 
 interface Props {
@@ -13,14 +14,9 @@ export function GameStub({ title, titleAr, theme }: Props) {
   return (
     <div className={shellClass}>
       {theme === "nhie" && (
-        <>
-          <span className="nhie-stub__scribble nhie-stub__scribble--1" aria-hidden="true">
-            🤫
-          </span>
-          <span className="nhie-stub__scribble nhie-stub__scribble--3" aria-hidden="true">
-            👉
-          </span>
-        </>
+        <span className="nhie-stub__scribble nhie-stub__scribble--1" aria-hidden="true">
+          <Sparkles />
+        </span>
       )}
       <div className="stub-card">
         {theme === "nhie" && <span className="nhie-stub__badge">Coming soon · قريباً</span>}

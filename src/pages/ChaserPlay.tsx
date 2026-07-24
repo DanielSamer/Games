@@ -5,6 +5,7 @@ import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { useChaserState } from "../hooks/useChaserState";
 import { Bi } from "../components/Bi";
+import { LoadingScreen } from "../components/LoadingScreen";
 import { ChaserTimerPanel } from "../components/chaser/ChaserTimerPanel";
 import { ChaserStepBoard } from "../components/chaser/ChaserStepBoard";
 import { ChaserQuestionCard } from "../components/chaser/ChaserQuestionCard";
@@ -90,8 +91,8 @@ export function ChaserPlay() {
 
   if (!gameId) {
     return (
-      <div className="page-center">
-        <p>
+      <div className="page-center chaser-theme">
+        <p className="loading-text">
           <Bi en="Missing game id." ar="مفيش رقم لعبة." />
         </p>
       </div>
@@ -99,13 +100,7 @@ export function ChaserPlay() {
   }
 
   if (game === undefined) {
-    return (
-      <div className="page-center chaser-theme">
-        <p className="loading-text">
-          <Bi en="Loading game…" ar="جاري تحميل اللعبة..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading game…" ar="جاري تحميل اللعبة..." theme="chaser" />;
   }
 
   if (game === null) {

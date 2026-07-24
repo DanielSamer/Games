@@ -1,20 +1,14 @@
 import type { ReactNode } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useConvexAuth } from "convex/react";
-import { Bi } from "./Bi";
+import { LoadingScreen } from "./LoadingScreen";
 
 export function RequireAuth({ children }: { children: ReactNode }) {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const location = useLocation();
 
   if (isLoading) {
-    return (
-      <div className="page-center">
-        <p className="loading-text">
-          <Bi en="Loading…" ar="جاري التحميل..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading…" ar="جاري التحميل..." theme="menu" />;
   }
 
   if (!isAuthenticated) {

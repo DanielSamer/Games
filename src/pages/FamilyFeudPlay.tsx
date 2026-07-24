@@ -6,6 +6,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { useGameState } from "../hooks/useGameState";
 import { useLanguageMode } from "../context/LanguageMode";
 import { Bi } from "../components/Bi";
+import { LoadingScreen } from "../components/LoadingScreen";
 import { Board } from "../components/Board";
 import { Scoreboard } from "../components/Scoreboard";
 import { Strikes } from "../components/Strikes";
@@ -104,13 +105,7 @@ export function FamilyFeudPlay() {
   }
 
   if (game === undefined) {
-    return (
-      <div className="page-center">
-        <p className="loading-text">
-          <Bi en="Loading game…" ar="جاري تحميل اللعبة..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading game…" ar="جاري تحميل اللعبة..." />;
   }
 
   if (game === null) {

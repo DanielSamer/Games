@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { Bi } from "./Bi";
+import { LoadingScreen } from "./LoadingScreen";
 
 // Client-side gate is UX only — every admin query independently re-checks
 // server-side (see convex/admin.ts requireAdmin). A non-admin landing here
@@ -20,18 +21,12 @@ export function RequireAdmin({ children }: { children: ReactNode }) {
   }, [isAdmin, logAccess]);
 
   if (isAdmin === undefined) {
-    return (
-      <div className="page-center">
-        <p className="loading-text">
-          <Bi en="Loading…" ar="جاري التحميل..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading…" ar="جاري التحميل..." theme="admin" />;
   }
 
   if (!isAdmin) {
     return (
-      <div className="page-center">
+      <div className="page-center admin-shell">
         <div className="stub-card">
           <h1 className="stub-title">403</h1>
           <p className="stub-desc">

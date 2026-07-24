@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { X } from "lucide-react";
 import type { ChaserQuestion } from "../../types/chaser";
 import { parseChaserDocx } from "../../utils/parseChaserDocx";
 import { Bi } from "../Bi";
@@ -135,7 +136,7 @@ export function ChaserQuestionManager({
             <Bi en="Manage Questions" ar="إدارة الأسئلة" />
           </h2>
           <button type="button" className="modal__close" onClick={onClose} aria-label="Close">
-            ✕
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 

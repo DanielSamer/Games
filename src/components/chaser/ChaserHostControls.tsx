@@ -1,3 +1,4 @@
+import { Check, Pause, Play, Volume2, VolumeX, X } from "lucide-react";
 import type { ChaserPhase, ChaserSide } from "../../types/chaser";
 import { Bi } from "../Bi";
 
@@ -114,13 +115,21 @@ export function ChaserHostControls({
             className="host-controls__award host-controls__award--a"
             onClick={() => onStealResolve(true)}
           >
-            ✓ <Bi en="Contestant Stole It (-1 Chaser)" ar="المتسابق خطفها (-1 للملاحق)" />
+            <Check size={16} aria-hidden="true" /> <Bi en="Contestant Stole It (-1 Chaser)" ar="المتسابق خطفها (-1 للملاحق)" />
           </button>
           <button type="button" className="host-controls__strike" onClick={() => onStealResolve(false)}>
-            ✕ <Bi en="Contestant Missed Too" ar="المتسابق غلط برضو" />
+            <X size={16} aria-hidden="true" /> <Bi en="Contestant Missed Too" ar="المتسابق غلط برضو" />
           </button>
           <button type="button" onClick={onTogglePause} disabled={phase !== "playing"}>
-            {running ? <Bi en="⏸ Pause" ar="⏸ إيقاف مؤقت" /> : <Bi en="▶ Resume" ar="▶ استكمال" />}
+            {running ? (
+              <>
+                <Pause size={16} aria-hidden="true" /> <Bi en="Pause" ar="إيقاف مؤقت" />
+              </>
+            ) : (
+              <>
+                <Play size={16} aria-hidden="true" /> <Bi en="Resume" ar="استكمال" />
+              </>
+            )}
           </button>
         </div>
       </div>
@@ -131,13 +140,21 @@ export function ChaserHostControls({
     <div className="host-controls chaser-host-controls">
       <div className="host-controls__row">
         <button type="button" className="host-controls__award host-controls__award--a" onClick={onCorrect} disabled={phase !== "playing"}>
-          ✓ <Bi en="Correct (Space)" ar="صح (مسافة)" />
+          <Check size={16} aria-hidden="true" /> <Bi en="Correct (Space)" ar="صح (مسافة)" />
         </button>
         <button type="button" className="host-controls__strike" onClick={onWrong} disabled={phase !== "playing"}>
-          ✕ <Bi en="Wrong (X)" ar="غلط (X)" />
+          <X size={16} aria-hidden="true" /> <Bi en="Wrong (X)" ar="غلط (X)" />
         </button>
         <button type="button" onClick={onTogglePause} disabled={phase !== "playing"}>
-          {running ? <Bi en="⏸ Pause" ar="⏸ إيقاف مؤقت" /> : <Bi en="▶ Resume" ar="▶ استكمال" />}
+          {running ? (
+            <>
+              <Pause size={16} aria-hidden="true" /> <Bi en="Pause" ar="إيقاف مؤقت" />
+            </>
+          ) : (
+            <>
+              <Play size={16} aria-hidden="true" /> <Bi en="Resume" ar="استكمال" />
+            </>
+          )}
         </button>
         <button type="button" className="host-controls__danger" onClick={onReset}>
           <Bi en="Reset" ar="إعادة" />
@@ -147,8 +164,8 @@ export function ChaserHostControls({
         <button type="button" onClick={onToggleShowAnswer}>
           {showAnswer ? <Bi en="Hide Answer" ar="إخفاء الإجابة" /> : <Bi en="Show Answer" ar="إظهار الإجابة" />}
         </button>
-        <button type="button" onClick={onToggleMute}>
-          {muted ? "🔇" : "🔊"}
+        <button type="button" onClick={onToggleMute} aria-label={muted ? "Unmute" : "Mute"}>
+          {muted ? <VolumeX size={16} aria-hidden="true" /> : <Volume2 size={16} aria-hidden="true" />}
         </button>
         <button type="button" onClick={onManageQuestions}>
           <Bi en="Manage Questions" ar="إدارة الأسئلة" />

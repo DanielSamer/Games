@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Check, X } from "lucide-react";
 import type { DblOrNothingQuestion, Difficulty } from "../../types/dblOrNothing";
 import { Bi } from "../Bi";
 
@@ -121,7 +122,7 @@ export function DblOrNothingQuestionManager({
             <Bi en="Manage Questions" ar="إدارة الأسئلة" />
           </h2>
           <button type="button" className="modal__close" onClick={onClose} aria-label="Close">
-            ✕
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
@@ -172,7 +173,12 @@ export function DblOrNothingQuestionManager({
                       checked={correctIndex === i}
                       onChange={() => setCorrectIndex(i)}
                     />{" "}
-                    Option {i + 1} (English) {correctIndex === i ? "✓ correct" : ""}
+                    Option {i + 1} (English){" "}
+                    {correctIndex === i && (
+                      <span className="round-form__correct-tag">
+                        <Check size={12} aria-hidden="true" /> correct
+                      </span>
+                    )}
                   </span>
                   <input
                     type="text"

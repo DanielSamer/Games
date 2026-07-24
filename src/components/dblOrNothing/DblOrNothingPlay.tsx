@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import type { Id } from "../../../convex/_generated/dataModel";
+import { Coins, Flame } from "lucide-react";
 import { Bi } from "../Bi";
+import { LoadingScreen } from "../LoadingScreen";
 import { StandingsWall } from "./StandingsWall";
 import { playLossFeedback, playWinFeedback } from "../../utils/donFeedback";
 
@@ -72,13 +74,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
   }, [session?.phase, session?.roundIndex, myRound?.correct]);
 
   if (session === undefined) {
-    return (
-      <div className="page-center don-theme">
-        <p className="loading-text">
-          <Bi en="Loading…" ar="جاري التحميل..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading room…" ar="جاري تحميل الغرفة..." theme="don" />;
   }
 
   if (!session) {
@@ -237,7 +233,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
 
           {myRound?.correct && streak >= 2 && (
             <p className="don-player__callout don-player__callout--streak">
-              🔥 <Bi en={`On a streak — ${streak} in a row!`} ar={`في سلسلة انتصارات — ${streak} على التوالي!`} />
+              <Flame size={16} aria-hidden="true" /> <Bi en={`On a streak — ${streak} in a row!`} ar={`في سلسلة انتصارات — ${streak} على التوالي!`} />
             </p>
           )}
 
@@ -249,7 +245,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
             if (!isBigRisk) return null;
             return (
               <p className="don-player__callout don-player__callout--big-risk">
-                💰 <Bi en="Big risk paid off!" ar="المخاطرة الكبيرة نجحت!" />
+                <Coins size={16} aria-hidden="true" /> <Bi en="Big risk paid off!" ar="المخاطرة الكبيرة نجحت!" />
               </p>
             );
           })()}
@@ -266,7 +262,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
               const names = passed.map((p) => p.nickname).join(", ");
               return (
                 <p className="don-player__callout don-player__callout--passed">
-                  🔥 <Bi en={`You just passed ${names}!`} ar={`لسه فُت ${names}!`} />
+                  <Flame size={16} aria-hidden="true" /> <Bi en={`You just passed ${names}!`} ar={`لسه فُت ${names}!`} />
                 </p>
               );
             }

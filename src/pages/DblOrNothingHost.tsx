@@ -4,7 +4,9 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import type { Id } from "../../convex/_generated/dataModel";
 import { DEFAULT_DBL_OR_NOTHING_SETTINGS, type DblOrNothingSettings } from "../types/dblOrNothing";
+import { Check } from "lucide-react";
 import { Bi } from "../components/Bi";
+import { LoadingScreen } from "../components/LoadingScreen";
 import { RoomQrCode } from "../components/dblOrNothing/RoomQrCode";
 import { StandingsWall } from "../components/dblOrNothing/StandingsWall";
 
@@ -71,25 +73,19 @@ export function DblOrNothingHost() {
 
   if (!roomId) {
     return (
-      <div className="page-center">
-        <p>Missing room id.</p>
+      <div className="page-center don-theme">
+        <p className="loading-text">Missing room id.</p>
       </div>
     );
   }
 
   if (room === undefined || players === undefined || session === undefined) {
-    return (
-      <div className="page-center">
-        <p className="loading-text">
-          <Bi en="Loading room…" ar="جاري تحميل الغرفة..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading room…" ar="جاري تحميل الغرفة..." theme="don" />;
   }
 
   if (room === null) {
     return (
-      <div className="page-center">
+      <div className="page-center don-theme">
         <div className="stub-card">
           <h1 className="stub-title">
             <Bi en="Room not found" ar="الغرفة مش موجودة" />
@@ -113,7 +109,7 @@ export function DblOrNothingHost() {
             ← <Bi en="Back to packs" ar="رجوع للحزم" />
           </Link>
         </div>
-        <header className="app-header">
+        <header className="app-header app-header--solo">
           <h1 className="app-title">
             <Bi en="Double or Nothing" ar="ضاعف أو اخسر" />
           </h1>
@@ -132,7 +128,11 @@ export function DblOrNothingHost() {
               <ul className="don-roster">
                 {players.map((p) => (
                   <li key={p._id}>
-                    {p.nickname} {p.connected ? "🟢" : "⚪"}
+                    {p.nickname}{" "}
+                    <span
+                      className={`don-roster__dot ${p.connected ? "don-roster__dot--online" : ""}`}
+                      aria-label={p.connected ? "Online" : "Offline"}
+                    />
                   </li>
                 ))}
               </ul>
@@ -219,7 +219,7 @@ export function DblOrNothingHost() {
                 <Bi en="Start Game" ar="ابدأ اللعبة" />
               </button>
               {players.length === 0 && (
-                <p className="round-form__error">
+                <p className="round-form__hint">
                   <Bi en="Waiting for at least one player to join." ar="في انتظار انضمام لاعب واحد على الأقل." />
                 </p>
               )}
@@ -327,7 +327,7 @@ export function DblOrNothingHost() {
             )}
             {question?.options && question.correctIndex !== null && (
               <p className="don-correct-answer">
-                ✓ <Bi en={question.options[question.correctIndex].en ?? ""} ar={question.options[question.correctIndex].ar ?? ""} />
+                <Check size={18} aria-hidden="true" /> <Bi en={question.options[question.correctIndex].en ?? ""} ar={question.options[question.correctIndex].ar ?? ""} />
               </p>
             )}
             <StandingsWall

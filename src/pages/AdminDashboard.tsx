@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuery } from "convex/react";
+import { TriangleAlert } from "lucide-react";
 import { api } from "../../convex/_generated/api";
 import { downloadCsv } from "../utils/csvExport";
 
@@ -268,7 +269,7 @@ export function AdminDashboard() {
                         <td>{s.playerCount}</td>
                         <td>{s.disconnectCount}</td>
                         <td>{s.neverAnswered}</td>
-                        <td>{s.isHighDisconnect && <span className="admin-flag-badge">⚠ high disconnects</span>}</td>
+                        <td>{s.isHighDisconnect && <span className="admin-flag-badge"><TriangleAlert size={13} aria-hidden="true" /> high disconnects</span>}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -428,7 +429,7 @@ export function AdminDashboard() {
                     <td>{Math.round(q.correctRate * 100)}%</td>
                     <td>{Math.round(q.skipRate * 100)}%</td>
                     <td>{Math.round(q.avgWagerPercent * 100)}%</td>
-                    <td>{q.difficultyMismatch && <span className="admin-flag-badge">⚠ tag mismatch</span>}</td>
+                    <td>{q.difficultyMismatch && <span className="admin-flag-badge"><TriangleAlert size={13} aria-hidden="true" /> tag mismatch</span>}</td>
                   </tr>
                 ))}
               </tbody>

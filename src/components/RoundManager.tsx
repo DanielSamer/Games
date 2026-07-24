@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { X } from "lucide-react";
 import type { Round, RoundAnswer } from "../types/game";
 
 interface AnswerDraft {
@@ -121,7 +122,7 @@ export function RoundManager({ open, onClose, rounds, onAddRound, onUpdateRound,
         <div className="modal__header">
           <h2>Manage Rounds</h2>
           <button type="button" className="modal__close" onClick={onClose} aria-label="Close">
-            ✕
+            <X size={18} aria-hidden="true" />
           </button>
         </div>
 
@@ -184,7 +185,7 @@ export function RoundManager({ open, onClose, rounds, onAddRound, onUpdateRound,
                     disabled={answerDrafts.length <= 2}
                     aria-label="Remove answer"
                   >
-                    ✕
+                    <X size={14} aria-hidden="true" />
                   </button>
                 </div>
               ))}

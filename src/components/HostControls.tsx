@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight, Volume2, VolumeX, X } from "lucide-react";
 import type { Round, TeamId } from "../types/game";
 
 interface Props {
@@ -50,10 +51,10 @@ export function HostControls({
           </select>
         </label>
         <button type="button" onClick={onPrev} disabled={roundIndex === 0}>
-          ◀ Prev
+          <ChevronLeft size={16} aria-hidden="true" /> Prev
         </button>
         <button type="button" onClick={onNext} disabled={roundIndex === rounds.length - 1}>
-          Next ▶
+          Next <ChevronRight size={16} aria-hidden="true" />
         </button>
         <button type="button" onClick={onResetRound}>
           Reset Round
@@ -68,7 +69,7 @@ export function HostControls({
 
       <div className="host-controls__row">
         <button type="button" className="host-controls__strike" onClick={onStrike} disabled={strikes >= 3}>
-          ✕ Wrong / Strike
+          <X size={16} aria-hidden="true" /> Wrong / Strike
         </button>
         <button type="button" className="host-controls__award host-controls__award--a" onClick={() => onAward("A")}>
           Give to {teamNames.A}
@@ -80,7 +81,15 @@ export function HostControls({
 
       <div className="host-controls__row">
         <button type="button" onClick={onToggleMute}>
-          {muted ? "🔇 Muted" : "🔊 Sound On"}
+          {muted ? (
+            <>
+              <VolumeX size={16} aria-hidden="true" /> Muted
+            </>
+          ) : (
+            <>
+              <Volume2 size={16} aria-hidden="true" /> Sound On
+            </>
+          )}
         </button>
       </div>
     </div>

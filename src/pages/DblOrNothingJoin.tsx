@@ -6,6 +6,7 @@ import type { Id } from "../../convex/_generated/dataModel";
 import { getDeviceToken } from "../utils/deviceToken";
 import { getPlayerSession, savePlayerSession } from "../utils/playerSession";
 import { Bi } from "../components/Bi";
+import { LoadingScreen } from "../components/LoadingScreen";
 import { DblOrNothingPlay } from "../components/dblOrNothing/DblOrNothingPlay";
 
 export function DblOrNothingJoin() {
@@ -37,13 +38,7 @@ export function DblOrNothingJoin() {
   }
 
   if (room === undefined) {
-    return (
-      <div className="page-center don-theme">
-        <p className="loading-text">
-          <Bi en="Looking for room…" ar="بندور على الغرفة..." />
-        </p>
-      </div>
-    );
+    return <LoadingScreen en="Loading room…" ar="جاري تحميل الغرفة..." theme="don" />;
   }
 
   if (room === null) {
