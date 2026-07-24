@@ -451,10 +451,14 @@ export const autoAdvanceRound = internalMutation({
 export const getForRoom = query({
   args: { roomId: v.id("rooms") },
   handler: async (ctx, { roomId }) => {
-    return await ctx.db
+    const session = await ctx.db
       .query("dblOrNothingSessions")
       .withIndex("by_roomId", (q) => q.eq("roomId", roomId))
       .unique();
+    if (!session) return session;
+    // Sent alongside phaseDeadline so clients can correct for their own
+    // clock being wrong instead of comparing it directly to Date.now().
+    return { ...session, serverNow: Date.now() };
   },
 });
 

@@ -19,6 +19,24 @@ interface Props {
 
 const HEARTBEAT_MS = 15_000;
 
+function useCountdown(deadline: number | undefined, serverNow: number | undefined) {
+  const [remaining, setRemaining] = useState(0);
+  useEffect(() => {
+    if (!deadline || !serverNow) {
+      setRemaining(0);
+      return;
+    }
+    // serverNow anchors the deadline to the server's clock so the countdown
+    // is correct even if this device's own clock is off.
+    const clockOffset = Date.now() - serverNow;
+    const tick = () => setRemaining(Math.max(0, Math.round((deadline - (Date.now() - clockOffset)) / 1000)));
+    tick();
+    const id = setInterval(tick, 250);
+    return () => clearInterval(id);
+  }, [deadline, serverNow]);
+  return remaining;
+}
+
 export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
   const session = useQuery(api.dblOrNothingSession.getForRoom, { roomId });
   const question = useQuery(
@@ -47,6 +65,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
   const [wagerError, setWagerError] = useState<string | null>(null);
   const [answerError, setAnswerError] = useState<string | null>(null);
   const [streak, setStreak] = useState(0);
+  const countdown = useCountdown(session?.phaseDeadline, session?.serverNow);
 
   useEffect(() => {
     const id = setInterval(() => void heartbeat({ playerId, secret }), HEARTBEAT_MS);
@@ -132,6 +151,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
             </p>
           ) : (
             <>
+              <p className="don-countdown">{countdown}s</p>
               <p className="don-player__wager-amount">{wager}</p>
               <input
                 type="range"
@@ -184,6 +204,7 @@ export function DblOrNothingPlay({ roomId, playerId, secret }: Props) {
 
       {session.phase === "question" && question?.options && (
         <div className="don-player__question">
+          <p className="don-countdown">{countdown}s</p>
           <p className="don-player__wager-reminder">
             <Bi en="You bet" ar="راهنت بـ" /> {myRound?.wagerAmount ?? 0}
             {myRound?.sure ? " (SURE)" : ""}

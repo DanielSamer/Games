@@ -30,7 +30,7 @@ export const DEFAULT_DBL_OR_NOTHING_SETTINGS: DblOrNothingSettings = {
   startingChips: 1000,
   rounds: 6,
   wagerSeconds: 20,
-  answerSeconds: 5,
+  answerSeconds: 15,
   bustRule: "eliminated",
   mercyStipend: 0,
   sureEnabled: false,

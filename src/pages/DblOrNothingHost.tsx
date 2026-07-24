@@ -10,18 +10,21 @@ import { LoadingScreen } from "../components/LoadingScreen";
 import { RoomQrCode } from "../components/dblOrNothing/RoomQrCode";
 import { StandingsWall } from "../components/dblOrNothing/StandingsWall";
 
-function useCountdown(deadline: number | undefined) {
+function useCountdown(deadline: number | undefined, serverNow: number | undefined) {
   const [remaining, setRemaining] = useState(0);
   useEffect(() => {
-    if (!deadline) {
+    if (!deadline || !serverNow) {
       setRemaining(0);
       return;
     }
-    const tick = () => setRemaining(Math.max(0, Math.round((deadline - Date.now()) / 1000)));
+    // serverNow anchors the deadline to the server's clock so the countdown
+    // is correct even if this device's own clock is off.
+    const clockOffset = Date.now() - serverNow;
+    const tick = () => setRemaining(Math.max(0, Math.round((deadline - (Date.now() - clockOffset)) / 1000)));
     tick();
     const id = setInterval(tick, 250);
     return () => clearInterval(id);
-  }, [deadline]);
+  }, [deadline, serverNow]);
   return remaining;
 }
 
@@ -69,7 +72,7 @@ export function DblOrNothingHost() {
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const countdown = useCountdown(session?.phaseDeadline);
+  const countdown = useCountdown(session?.phaseDeadline, session?.serverNow);
 
   if (!roomId) {
     return (
