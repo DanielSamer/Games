@@ -92,6 +92,221 @@ Open a saved game, then click **"+ Create / Manage Rounds"** in the host control
 - `src/audio/sounds.ts` — Web Audio–generated "ding", buzzer, and award jingle (no audio assets).
 - `src/index.css` — all styling (Tailwind v4 + custom Family Feud–style theme, plus menu/auth/lobby pages).
 
+## Analytics (Phase A)
+
+Lightweight, privacy-conscious event logging for game-night data. Originally
+scoped to the single-host flow only; Double or Nothing (below) added the
+first live multiplayer room/QR-join/player layer, and its events reuse the
+same `logEvent`/`logClientEvent` helper — see "Analytics" under Double or
+Nothing for what's added.
+
+**What's collected**
+- Host account events: `host_signed_up`, `host_signed_in`.
+- Game/question CRUD: `game_created`, `game_renamed`, `game_deleted`,
+  `round_added/updated/removed`, `chaser_created/renamed/deleted`,
+  `question_added/updated/removed`, `questions_imported`.
+- `game_play_started` — fired once when a saved game's play screen loads,
+  tagged with `gameId` and `gameType`.
+
+Every event is one row in the `events` table (`convex/schema.ts`):
+`eventType`, `userId` (the host, if signed in), `occurredAt`, and a small
+JSON `payload`. All events are written through the single helper
+`logEvent` in `convex/analytics.ts` — nothing inserts into `events`
+directly anywhere else in the codebase. Writes are scheduled
+(`ctx.scheduler.runAfter(0, ...)`) and wrapped in try/catch, so a failed
+analytics write can never fail or slow down the mutation that triggered
+it.
+
+**What's deliberately NOT collected**
+- No player data of any kind — there are no players, rooms, or sessions
+  in this app yet, so no device tokens, nicknames, disconnect events, or
+  answer data exist to collect.
+- No host email in any event payload — only the Convex `userId`.
+- No IP addresses, user agents, or device fingerprints.
+- No third-party analytics SDKs.
+
+**Device tokens**: not applicable yet — there's no anonymous-player join
+flow in this codebase. When the multiplayer/QR-join layer is built, add a
+random UUID stored in player-side `localStorage`, never derived from IP/
+UA/fingerprint, per the identity model in the original project brief.
+
+**Named queries**: `analytics/queries.sql` documents one question per
+block with the real Convex implementation in
+`convex/analyticsQueries.ts` (Convex has no SQL engine — the `.sql` file
+is illustrative reference, not executable).
+
+**Purge / retention**: `convex/analytics.ts` exports `purgeOldEvents`
+(an `internalMutation`), deleting `events` rows older than
+`olderThanDays` (default 90) in batches of 200, rescheduling itself until
+the backlog clears. `convex/crons.ts` runs it automatically every 24
+hours. To purge with a different window manually:
+
+```bash
+npx convex run analytics:purgeOldEvents '{"olderThanDays": 30}'
+```
+
+Nothing else depends on raw event rows staying around — the reporting
+queries in `convex/analyticsQueries.ts` re-derive their numbers from
+whatever's left, so purging is always safe.
+
+## Double or Nothing (ضاعف أو اخسر)
+
+The first live multiplayer game: a host projects one screen, players join
+on their own phones by scanning a QR code (no account, no app install).
+Everyone starts with the same chip stack; each round they secretly wager
+part of it on a multiple-choice question after seeing only its category
+and difficulty, then answer to double or lose the wager.
+
+### Rules
+
+- **Round loop**: Preview (category + difficulty only) → Wager (secret,
+  capped at current stack, timer-bound) → Lock → Question (multiple
+  choice) → Resolve (server-computed) → Reveal ("the wall": a ranked,
+  animated bar chart of every stack).
+- A player who doesn't wager in time bets 0. A player who doesn't answer
+  in time is scored wrong on whatever they wagered.
+- **Bust rule** (host picks one at game start): **Mercy** (default —
+  a 0-or-below stack is topped up to a configurable stipend each round
+  so no one just sits out) or **Eliminated** (a 0-or-below player is out
+  for the rest of the game).
+- **SURE** (off by default): a player may flag their wager for a 1.5x
+  multiplier on both the win and the loss.
+- **Late joiners**: start at the current average stack across active
+  players (configurable), not the original starting amount.
+- **Disconnects**: identity is a device token in the player's
+  `localStorage`, not a live connection — a dropped phone keeps its
+  stack and simply resumes on reload/reconnect. Camp wifi dropping never
+  costs anyone their chips.
+- **Ties** at the end share a rank rather than being broken arbitrarily.
+- All chip math (wager validation, correct/wrong resolution, bust
+  handling) happens server-side in `convex/dblOrNothingSession.ts` —
+  the client only ever sends a wager amount or an answer choice, never a
+  resulting balance.
+
+### Host configuration (set when starting a room)
+
+| Setting | Default |
+| --- | --- |
+| Starting chips | 1000 |
+| Rounds | 6 |
+| Wager timer | 20s |
+| Answer timer | 20s |
+| Bust rule | Mercy (stipend: 100/round) |
+| SURE | Off |
+| Late joiners start at average stack | On |
+| Final round announced as uncapped | Off |
+
+### Adding questions to a pack
+
+Open **Double or Nothing** from the main menu → pick or create a pack →
+**Edit** → fill in category, difficulty (easy/medium/hard — required,
+since players bet on it before seeing the question), question text,
+2–6 options, and mark the correct one. Everything supports English and/or
+Arabic independently, same as Family Feud/Chaser content.
+
+`src/data/dblOrNothingQuestions.json` seeds a brand-new account with a
+**placeholder** 30-question pack (mixed categories, some Egypt-local —
+prices, geography, music) — replace it before a real event; it's only
+used once, the first time an account has no packs yet.
+
+### How the live room works
+
+- `convex/rooms.ts` / `convex/players.ts` — a room has a short join code
+  (QR-encoded); a player's identity is `{ deviceToken, secret }` kept in
+  `localStorage` (`src/utils/deviceToken.ts`, `src/utils/playerSession.ts`).
+  `secret` (not the player's `_id`, which the whole room can see via the
+  roster) is what proves ownership when submitting a wager/answer or
+  reading your own hidden round state — see `verifyPlayerSecret`.
+- Host and player screens are both just Convex `useQuery` subscriptions
+  against the same session/room documents — Convex's reactivity is the
+  "sync," no custom websocket layer was built.
+- Phase timers (wager lock, answer lock) are driven by
+  `ctx.scheduler`, not the host's browser, so they're correct even if the
+  host's tab closes mid-round.
+
+### Analytics
+
+Reuses the existing `logEvent`/`logClientEvent` helper and event list in
+`convex/analytics.ts` — no new tracking path was added. New event types:
+`dbl_or_nothing_pack_created`, `game_started`, `round_preview_shown`,
+`wager_locked`, `answer_submitted`, `round_resolved`, `game_ended`.
+`wager_locked` and `round_resolved` record the wager as a **percentage of
+the player's stack at the time**, not just the raw chip amount, plus
+whether SURE was used — that's what tells you whether a difficulty tag is
+calibrated (are players betting big on Easy, small on Hard?).
+
+## Admin dashboard (Phase B)
+
+A private dashboard at `/admin` for game-night data analysis. Not linked
+from anywhere in the UI — you have to know the URL, and even then it's
+useless without admin access.
+
+**Access model**
+- Admin status is a row in a dedicated `admins` table (`{ userId }`), not
+  a flag on the `users` table itself — there's no field a client could
+  ever request/patch to escalate their own account, since the auth
+  library owns the `users` schema.
+- The **only** way in is the CLI: `npx convex run admin:grantAdmin
+  '{"email":"you@example.com"}'` (the account must already exist — sign
+  up normally first, or see "Creating an account without the sign-up
+  form" below). There is no signup flow, button, or API path that grants
+  it.
+- Every dashboard query (`convex/adminDashboard.ts`) independently
+  re-derives admin status server-side via `requireAdmin` in every single
+  call — the client-side `RequireAdmin` route guard is UX only. A
+  non-admin hitting `/admin` directly, or calling one of these functions
+  directly, gets the same "Not authorized" error and zero data either
+  way, signed in or not.
+- Every time the dashboard is opened by an admin, `admin:logAccess`
+  records `{ userId, occurredAt }` in `adminAuditLog` (`convex/admin.ts`
+  → `listAuditLog` to read it back). IP isn't recorded — Convex
+  queries/mutations don't have access to the caller's network request
+  (only an HTTP action would), and admin sign-in goes through the same
+  in-app session as every other host. Login attempts are already
+  rate-limited for all accounts via `convex/rateLimit.ts`, admin
+  included — there's no separate admin login to protect.
+
+**Creating an account without the sign-up form**: `npx convex run
+adminAccounts:createHostAdminAccount
+'{"email":"you@example.com","password":"..."}'` creates the account
+directly (bypassing the UI) and grants it admin in one step. Useful for
+scripting/setup; the person should still change the password afterward
+via the normal "Forgot password?" flow.
+
+**Privacy boundary**: every screen below shows aggregates only — no
+screen lists or searches individual players, no screen displays a
+device token or player nickname tied to identity beyond what's already
+public in a room's own roster while that room is live. Player-level data
+never leaves a single session's own results.
+
+**Screens** (`src/pages/AdminDashboard.tsx`, all driven by
+`convex/adminDashboard.ts` — nothing is inlined/computed in the
+component):
+1. **Overview** — unique devices, total joins, sessions run, plays by
+   game type, for today/7d/30d/all-time, plus a sessions-per-week trend.
+2. **Popularity** — which games, which Double or Nothing packs, and
+   which categories actually get chosen and played, ranked.
+3. **Time Patterns** — activity by hour-of-day and day-of-week, so you
+   can see when game nights actually happen.
+4. **Question Health** — every Double or Nothing question, sortable by
+   "most broken first": times asked, correct %, skip %, average wager %,
+   and a flag when the actual correct-rate disagrees with its difficulty
+   tag (e.g. an "easy" question under ~65% correct, or a "hard" one
+   over ~40%).
+5. **Sessions** — the 50 most recent Double or Nothing rooms: host,
+   pack, player count, current round/phase, start/end time.
+6. **Hosts** — sessions run per host, first/last session, and whether
+   they ran a second one within 30 days of their first.
+
+**A design note on data durability**: the `events` table (used for
+Overview/Popularity's `game_play_started` counts) is purged after 90
+days by design (see Analytics section above). Everywhere the same fact
+is already captured permanently — `dblOrNothingSessions`,
+`dblOrNothingPlayerState`, `dblOrNothingPlayerRounds`, `players`,
+`rooms` — these dashboard queries read from *that* instead, so Sessions,
+Question Health, and Hosts don't silently lose history past the purge
+window the way a pure event-log query would.
+
 ## Adding The Chaser / Never Have I Ever for real
 
 Both currently render `<GameStub title="..." />` behind `RequireAuth` in `src/App.tsx`. To build one out: add its own Convex tables/functions (mirroring the `games` table pattern in `convex/games.ts` if it needs saved content), and swap its route's `element` from `GameStub` to a real page component.

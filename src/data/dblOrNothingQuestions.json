@@ -1,0 +1,932 @@
+[
+  {
+    "id": "don-001",
+    "category": {
+      "en": "Geography",
+      "ar": "جغرافيا"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "What is the capital of Egypt?",
+      "ar": "ما هي عاصمة مصر؟"
+    },
+    "options": [
+      {
+        "en": "Cairo",
+        "ar": "القاهرة"
+      },
+      {
+        "en": "Alexandria",
+        "ar": "الإسكندرية"
+      },
+      {
+        "en": "Giza",
+        "ar": "الجيزة"
+      },
+      {
+        "en": "Luxor",
+        "ar": "الأقصر"
+      }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-002",
+    "category": {
+      "en": "Egypt Prices",
+      "ar": "أسعار مصرية"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "Roughly how much is a standard metro ticket in Cairo (2025)?",
+      "ar": "تقريباً كام سعر تذكرة المترو العادية في القاهرة (٢٠٢٥)؟"
+    },
+    "options": [
+      {
+        "en": "5 EGP",
+        "ar": "٥ جنيه"
+      },
+      {
+        "en": "10 EGP",
+        "ar": "١٠ جنيه"
+      },
+      {
+        "en": "25 EGP",
+        "ar": "٢٥ جنيه"
+      },
+      {
+        "en": "50 EGP",
+        "ar": "٥٠ جنيه"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-003",
+    "category": {
+      "en": "History",
+      "ar": "تاريخ"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "Which pharaoh built the Great Pyramid of Giza?",
+      "ar": "مين الفرعون اللي بنى الهرم الأكبر بالجيزة؟"
+    },
+    "options": [
+      {
+        "en": "Tutankhamun",
+        "ar": "توت عنخ آمون"
+      },
+      {
+        "en": "Khufu",
+        "ar": "خوفو"
+      },
+      {
+        "en": "Ramses II",
+        "ar": "رمسيس التاني"
+      },
+      {
+        "en": "Akhenaten",
+        "ar": "إخناتون"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-004",
+    "category": {
+      "en": "Music",
+      "ar": "موسيقى"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "Which instrument does Omar Khairat mainly play?",
+      "ar": "عمر خيرت بيعزف على أنهي آلة أساسًا؟"
+    },
+    "options": [
+      {
+        "en": "Oud",
+        "ar": "عود"
+      },
+      {
+        "en": "Piano",
+        "ar": "بيانو"
+      },
+      {
+        "en": "Violin",
+        "ar": "كمان"
+      },
+      {
+        "en": "Nay",
+        "ar": "ناي"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-005",
+    "category": {
+      "en": "Science",
+      "ar": "علوم"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "What planet is known as the Red Planet?",
+      "ar": "أنهي كوكب معروف بالكوكب الأحمر؟"
+    },
+    "options": [
+      {
+        "en": "Venus",
+        "ar": "الزهرة"
+      },
+      {
+        "en": "Mars",
+        "ar": "المريخ"
+      },
+      {
+        "en": "Jupiter",
+        "ar": "المشترى"
+      },
+      {
+        "en": "Saturn",
+        "ar": "زحل"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-006",
+    "category": {
+      "en": "Geography",
+      "ar": "جغرافيا"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "Which is the longest river in the world?",
+      "ar": "إيه أطول نهر في العالم؟"
+    },
+    "options": [
+      {
+        "en": "Amazon",
+        "ar": "الأمازون"
+      },
+      {
+        "en": "Nile",
+        "ar": "النيل"
+      },
+      {
+        "en": "Yangtze",
+        "ar": "يانجتسي"
+      },
+      {
+        "en": "Mississippi",
+        "ar": "المسيسيبي"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-007",
+    "category": {
+      "en": "Sports",
+      "ar": "رياضة"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "How many players are on a football team on the field?",
+      "ar": "كام لاعب في فريق الكورة جوه الملعب؟"
+    },
+    "options": [
+      {
+        "en": "9",
+        "ar": "٩"
+      },
+      {
+        "en": "10",
+        "ar": "١٠"
+      },
+      {
+        "en": "11",
+        "ar": "١١"
+      },
+      {
+        "en": "12",
+        "ar": "١٢"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-008",
+    "category": {
+      "en": "Egypt Local",
+      "ar": "معلومات محلية"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "Which Egyptian city is known as \"The Bride of the Mediterranean\"?",
+      "ar": "أنهي مدينة مصرية بتتلقب \"عروسة البحر المتوسط\"؟"
+    },
+    "options": [
+      {
+        "en": "Port Said",
+        "ar": "بورسعيد"
+      },
+      {
+        "en": "Alexandria",
+        "ar": "الإسكندرية"
+      },
+      {
+        "en": "Damietta",
+        "ar": "دمياط"
+      },
+      {
+        "en": "Ismailia",
+        "ar": "الإسماعيلية"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-009",
+    "category": {
+      "en": "Bible / Church",
+      "ar": "الكتاب المقدس"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "Who built the ark in the story of the flood?",
+      "ar": "مين اللي بنى الفلك في قصة الطوفان؟"
+    },
+    "options": [
+      {
+        "en": "Moses",
+        "ar": "موسى"
+      },
+      {
+        "en": "Noah",
+        "ar": "نوح"
+      },
+      {
+        "en": "Abraham",
+        "ar": "إبراهيم"
+      },
+      {
+        "en": "David",
+        "ar": "داود"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-010",
+    "category": {
+      "en": "Movies",
+      "ar": "أفلام"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "What is the name of the fictional African country in Black Panther?",
+      "ar": "إيه اسم الدولة الأفريقية الخيالية في فيلم Black Panther؟"
+    },
+    "options": [
+      {
+        "en": "Zamunda",
+        "ar": "زاموندا"
+      },
+      {
+        "en": "Wakanda",
+        "ar": "واكاندا"
+      },
+      {
+        "en": "Genovia",
+        "ar": "جينوفيا"
+      },
+      {
+        "en": "Latveria",
+        "ar": "لاتفيريا"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-011",
+    "category": {
+      "en": "Egypt Prices",
+      "ar": "أسعار مصرية"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "Roughly how much did a liter of gasoline (92) cost in Egypt in early 2025?",
+      "ar": "تقريباً كام سعر لتر البنزين (٩٢) في مصر في أوائل ٢٠٢٥؟"
+    },
+    "options": [
+      {
+        "en": "6 EGP",
+        "ar": "٦ جنيه"
+      },
+      {
+        "en": "13 EGP",
+        "ar": "١٣ جنيه"
+      },
+      {
+        "en": "17.25 EGP",
+        "ar": "١٧.٢٥ جنيه"
+      },
+      {
+        "en": "25 EGP",
+        "ar": "٢٥ جنيه"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-012",
+    "category": {
+      "en": "Science",
+      "ar": "علوم"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "What gas do plants absorb from the air for photosynthesis?",
+      "ar": "إيه الغاز اللي النباتات بتمتصه من الهوا عشان البناء الضوئي؟"
+    },
+    "options": [
+      {
+        "en": "Oxygen",
+        "ar": "الأكسجين"
+      },
+      {
+        "en": "Nitrogen",
+        "ar": "النيتروجين"
+      },
+      {
+        "en": "Carbon dioxide",
+        "ar": "ثاني أكسيد الكربون"
+      },
+      {
+        "en": "Hydrogen",
+        "ar": "الهيدروجين"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-013",
+    "category": {
+      "en": "General Knowledge",
+      "ar": "معلومات عامة"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "How many days are there in a leap year?",
+      "ar": "كام يوم في السنة الكبيسة؟"
+    },
+    "options": [
+      {
+        "en": "364",
+        "ar": "٣٦٤"
+      },
+      {
+        "en": "365",
+        "ar": "٣٦٥"
+      },
+      {
+        "en": "366",
+        "ar": "٣٦٦"
+      },
+      {
+        "en": "367",
+        "ar": "٣٦٧"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-014",
+    "category": {
+      "en": "Geography",
+      "ar": "جغرافيا"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "Which country has the most pyramids in the world (more than Egypt)?",
+      "ar": "أنهي دولة فيها أهرامات أكتر من مصر؟"
+    },
+    "options": [
+      {
+        "en": "Mexico",
+        "ar": "المكسيك"
+      },
+      {
+        "en": "Sudan",
+        "ar": "السودان"
+      },
+      {
+        "en": "Peru",
+        "ar": "بيرو"
+      },
+      {
+        "en": "China",
+        "ar": "الصين"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-015",
+    "category": {
+      "en": "Music",
+      "ar": "موسيقى"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "Amr Diab is originally from which Egyptian governorate?",
+      "ar": "عمرو دياب أصله من أنهي محافظة مصرية؟"
+    },
+    "options": [
+      {
+        "en": "Port Said",
+        "ar": "بورسعيد"
+      },
+      {
+        "en": "Ismailia",
+        "ar": "الإسماعيلية"
+      },
+      {
+        "en": "Damietta",
+        "ar": "دمياط"
+      },
+      {
+        "en": "Suez",
+        "ar": "السويس"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-016",
+    "category": {
+      "en": "Sports",
+      "ar": "رياضة"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "How many times has Egypt won the Africa Cup of Nations (as of 2024)?",
+      "ar": "مصر كسبت كام مرة كأس الأمم الأفريقية (لحد ٢٠٢٤)؟"
+    },
+    "options": [
+      {
+        "en": "5",
+        "ar": "٥"
+      },
+      {
+        "en": "6",
+        "ar": "٦"
+      },
+      {
+        "en": "7",
+        "ar": "٧"
+      },
+      {
+        "en": "8",
+        "ar": "٨"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-017",
+    "category": {
+      "en": "Bible / Church",
+      "ar": "الكتاب المقدس"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "In the Nativity story, in which town was Jesus born?",
+      "ar": "في قصة الميلاد، يسوع اتولد في أنهي بلد؟"
+    },
+    "options": [
+      {
+        "en": "Nazareth",
+        "ar": "الناصرة"
+      },
+      {
+        "en": "Bethlehem",
+        "ar": "بيت لحم"
+      },
+      {
+        "en": "Jerusalem",
+        "ar": "أورشليم"
+      },
+      {
+        "en": "Jericho",
+        "ar": "أريحا"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-018",
+    "category": {
+      "en": "General Knowledge",
+      "ar": "معلومات عامة"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "What is the largest ocean on Earth?",
+      "ar": "إيه أكبر محيط في الأرض؟"
+    },
+    "options": [
+      {
+        "en": "Atlantic",
+        "ar": "الأطلسي"
+      },
+      {
+        "en": "Indian",
+        "ar": "الهندي"
+      },
+      {
+        "en": "Pacific",
+        "ar": "الهادئ"
+      },
+      {
+        "en": "Arctic",
+        "ar": "المتجمد الشمالي"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-019",
+    "category": {
+      "en": "Egypt Local",
+      "ar": "معلومات محلية"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "What is the local name for the traditional Egyptian flatbread?",
+      "ar": "إيه الاسم المحلي للعيش المصري التقليدي؟"
+    },
+    "options": [
+      {
+        "en": "Baladi bread",
+        "ar": "عيش بلدي"
+      },
+      {
+        "en": "Naan",
+        "ar": "نان"
+      },
+      {
+        "en": "Pita only",
+        "ar": "بيتا بس"
+      },
+      {
+        "en": "Tortilla",
+        "ar": "تورتيلا"
+      }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-020",
+    "category": {
+      "en": "Movies",
+      "ar": "أفلام"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "In Toy Story, who is Woody's best friend (a space ranger toy)?",
+      "ar": "في Toy Story، مين صاحب وودي (لعبة رائد فضاء)؟"
+    },
+    "options": [
+      {
+        "en": "Rex",
+        "ar": "ريكس"
+      },
+      {
+        "en": "Buzz Lightyear",
+        "ar": "باز لايتير"
+      },
+      {
+        "en": "Mr. Potato Head",
+        "ar": "مستر بوتيتو هيد"
+      },
+      {
+        "en": "Slinky",
+        "ar": "سلينكي"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-021",
+    "category": {
+      "en": "Science",
+      "ar": "علوم"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "What is the chemical symbol for gold?",
+      "ar": "إيه الرمز الكيميائي للذهب؟"
+    },
+    "options": [
+      {
+        "en": "Gd",
+        "ar": "Gd"
+      },
+      {
+        "en": "Go",
+        "ar": "Go"
+      },
+      {
+        "en": "Au",
+        "ar": "Au"
+      },
+      {
+        "en": "Ag",
+        "ar": "Ag"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-022",
+    "category": {
+      "en": "Egypt Prices",
+      "ar": "أسعار مصرية"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "Roughly how much is a small cup of Egyptian tea (koshary-style cafe) 2025?",
+      "ar": "تقريباً كام كوباية شاي صغيرة في قهوة بلدي في ٢٠٢٥؟"
+    },
+    "options": [
+      {
+        "en": "5-10 EGP",
+        "ar": "٥-١٠ جنيه"
+      },
+      {
+        "en": "50 EGP",
+        "ar": "٥٠ جنيه"
+      },
+      {
+        "en": "100 EGP",
+        "ar": "١٠٠ جنيه"
+      },
+      {
+        "en": "200 EGP",
+        "ar": "٢٠٠ جنيه"
+      }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-023",
+    "category": {
+      "en": "History",
+      "ar": "تاريخ"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "In what year did the Suez Canal officially open?",
+      "ar": "قناة السويس اتفتحت رسميًا سنة كام؟"
+    },
+    "options": [
+      {
+        "en": "1859",
+        "ar": "١٨٥٩"
+      },
+      {
+        "en": "1869",
+        "ar": "١٨٦٩"
+      },
+      {
+        "en": "1879",
+        "ar": "١٨٧٩"
+      },
+      {
+        "en": "1902",
+        "ar": "١٩٠٢"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-024",
+    "category": {
+      "en": "General Knowledge",
+      "ar": "معلومات عامة"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "How many continents are there?",
+      "ar": "كام قارة في العالم؟"
+    },
+    "options": [
+      {
+        "en": "5",
+        "ar": "٥"
+      },
+      {
+        "en": "6",
+        "ar": "٦"
+      },
+      {
+        "en": "7",
+        "ar": "٧"
+      },
+      {
+        "en": "8",
+        "ar": "٨"
+      }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-025",
+    "category": {
+      "en": "Sports",
+      "ar": "رياضة"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "Mohamed Salah plays for which position?",
+      "ar": "محمد صلاح بيلعب في أنهي مركز؟"
+    },
+    "options": [
+      {
+        "en": "Goalkeeper",
+        "ar": "حارس مرمى"
+      },
+      {
+        "en": "Forward/Winger",
+        "ar": "مهاجم/جناح"
+      },
+      {
+        "en": "Center back",
+        "ar": "قلب دفاع"
+      },
+      {
+        "en": "Referee",
+        "ar": "حكم"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-026",
+    "category": {
+      "en": "Music",
+      "ar": "موسيقى"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "Which Egyptian singer is known as \"El Sol\" (The Sun)?",
+      "ar": "أنهي مطرب مصري معروف بلقب \"الصول\"؟"
+    },
+    "options": [
+      {
+        "en": "Amr Diab",
+        "ar": "عمرو دياب"
+      },
+      {
+        "en": "Mohamed Mounir",
+        "ar": "محمد منير"
+      },
+      {
+        "en": "Tamer Hosny",
+        "ar": "تامر حسني"
+      },
+      {
+        "en": "Hakim",
+        "ar": "حكيم"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-027",
+    "category": {
+      "en": "Egypt Local",
+      "ar": "معلومات محلية"
+    },
+    "difficulty": "medium",
+    "question": {
+      "en": "Which sea lies to the east of the Sinai Peninsula?",
+      "ar": "أنهي بحر بيحد شبه جزيرة سيناء من الشرق؟"
+    },
+    "options": [
+      {
+        "en": "Mediterranean Sea",
+        "ar": "البحر المتوسط"
+      },
+      {
+        "en": "Red Sea",
+        "ar": "البحر الأحمر"
+      },
+      {
+        "en": "Arabian Sea",
+        "ar": "بحر العرب"
+      },
+      {
+        "en": "Black Sea",
+        "ar": "البحر الأسود"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-028",
+    "category": {
+      "en": "Bible / Church",
+      "ar": "الكتاب المقدس"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "How many books are traditionally in the New Testament?",
+      "ar": "العهد الجديد فيه كام سفر بحسب المتعارف عليه؟"
+    },
+    "options": [
+      {
+        "en": "24",
+        "ar": "٢٤"
+      },
+      {
+        "en": "27",
+        "ar": "٢٧"
+      },
+      {
+        "en": "30",
+        "ar": "٣٠"
+      },
+      {
+        "en": "39",
+        "ar": "٣٩"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-029",
+    "category": {
+      "en": "Movies",
+      "ar": "أفلام"
+    },
+    "difficulty": "hard",
+    "question": {
+      "en": "Who directed the movie \"Inception\"?",
+      "ar": "مين مخرج فيلم \"Inception\"؟"
+    },
+    "options": [
+      {
+        "en": "Steven Spielberg",
+        "ar": "ستيفن سبيلبرج"
+      },
+      {
+        "en": "Christopher Nolan",
+        "ar": "كريستوفر نولان"
+      },
+      {
+        "en": "James Cameron",
+        "ar": "جيمس كاميرون"
+      },
+      {
+        "en": "Ridley Scott",
+        "ar": "ريدلي سكوت"
+      }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-030",
+    "category": {
+      "en": "General Knowledge",
+      "ar": "معلومات عامة"
+    },
+    "difficulty": "easy",
+    "question": {
+      "en": "What color do you get by mixing blue and yellow?",
+      "ar": "لو خلطت الأزرق مع الأصفر هيطلع لون إيه؟"
+    },
+    "options": [
+      {
+        "en": "Purple",
+        "ar": "بنفسجي"
+      },
+      {
+        "en": "Green",
+        "ar": "أخضر"
+      },
+      {
+        "en": "Orange",
+        "ar": "برتقالي"
+      },
+      {
+        "en": "Brown",
+        "ar": "بني"
+      }
+    ],
+    "correctIndex": 1
+  }
+]

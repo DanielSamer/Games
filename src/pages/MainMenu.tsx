@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useConvexAuth } from "convex/react";
+import { useConvexAuth, useQuery } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
+import { api } from "../../convex/_generated/api";
 import { useLanguageMode } from "../context/LanguageMode";
 import { MenuBackground } from "../components/menu/MenuBackground";
 import { ShowCard, type ShowCardData } from "../components/menu/ShowCard";
@@ -31,6 +32,17 @@ const shows: ShowCardData[] = [
     tagAr: "واحد ضد واحد · بيتحكم فيها المُقدِّم",
   },
   {
+    id: "don",
+    to: "/double-or-nothing",
+    accent: "#2f9e6b",
+    titleLinesEn: ["Double or", "Nothing"],
+    nameAr: "ضاعف أو اخسر",
+    descEn: "Wager your stack, answer to double it.",
+    descAr: "راهن برصيدك وجاوب صح تضاعفه.",
+    tagEn: "Live phones · QR join",
+    tagAr: "لعب مباشر · انضمام بالكيو آر",
+  },
+  {
     id: "nhie",
     to: "/never-have-i-ever",
     accent: "#ec4899",
@@ -46,6 +58,7 @@ const shows: ShowCardData[] = [
 export function MainMenu() {
   const { isAuthenticated } = useConvexAuth();
   const { signOut } = useAuthActions();
+  const isAdmin = useQuery(api.admin.isCurrentUserAdmin);
   const { mode } = useLanguageMode();
   const isAr = mode === "ar";
   const [hoveredId, setHoveredId] = useState<ShowCardData["id"] | null>(null);
@@ -59,15 +72,22 @@ export function MainMenu() {
       <TopBar
         masthead={<span className="menu-masthead">Games</span>}
         right={
-          isAuthenticated ? (
-            <button type="button" className="menu-signout" onClick={() => void signOut()}>
-              {isAr ? "تسجيل خروج" : "Sign out"}
-            </button>
-          ) : (
-            <Link to="/sign-in" className="menu-signout">
-              {isAr ? "تسجيل دخول" : "Sign in"}
-            </Link>
-          )
+          <>
+            {isAdmin && (
+              <Link to="/admin" className="menu-signout">
+                {isAr ? "لوحة التحكم" : "Dashboard"}
+              </Link>
+            )}
+            {isAuthenticated ? (
+              <button type="button" className="menu-signout" onClick={() => void signOut()}>
+                {isAr ? "تسجيل خروج" : "Sign out"}
+              </button>
+            ) : (
+              <Link to="/sign-in" className="menu-signout">
+                {isAr ? "تسجيل دخول" : "Sign in"}
+              </Link>
+            )}
+          </>
         }
       />
 

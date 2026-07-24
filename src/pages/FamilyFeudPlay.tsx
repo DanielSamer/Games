@@ -22,6 +22,7 @@ export function FamilyFeudPlay() {
   const addRound = useMutation(api.games.addRound);
   const updateRound = useMutation(api.games.updateRound);
   const removeRound = useMutation(api.games.removeRound);
+  const logClientEvent = useMutation(api.analytics.logClientEvent);
 
   const rounds = game?.rounds ?? [];
   const {
@@ -42,6 +43,15 @@ export function FamilyFeudPlay() {
   useEffect(() => {
     setMuted(state.muted);
   }, [state.muted]);
+
+  useEffect(() => {
+    if (!game) return;
+    void logClientEvent({
+      eventType: "game_play_started",
+      payload: { gameId: game._id, gameType: "family-feud" },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game?._id]);
 
   useEffect(() => {
     document.documentElement.dir = siteLangMode === "ar" ? "rtl" : "ltr";

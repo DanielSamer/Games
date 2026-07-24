@@ -18,6 +18,7 @@ export function AuthPage({ mode }: Props) {
   const assertSignInAllowed = useMutation(api.rateLimit.assertSignInAllowed);
   const recordFailedSignIn = useMutation(api.rateLimit.recordFailedSignIn);
   const clearSignInAttempts = useMutation(api.rateLimit.clearSignInAttempts);
+  const logClientEvent = useMutation(api.analytics.logClientEvent);
   const redirectTo = (location.state as { from?: string } | null)?.from ?? "/";
 
   const [email, setEmail] = useState("");
@@ -39,7 +40,12 @@ export function AuthPage({ mode }: Props) {
         }
       }
       await signIn("password", { email, password, flow: mode });
-      if (mode === "signIn") await clearSignInAttempts({ email });
+      if (mode === "signIn") {
+        await clearSignInAttempts({ email });
+        void logClientEvent({ eventType: "host_signed_in" });
+      } else {
+        void logClientEvent({ eventType: "host_signed_up" });
+      }
       navigate(redirectTo, { replace: true });
     } catch (err) {
       // eslint-disable-next-line no-console

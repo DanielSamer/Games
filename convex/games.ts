@@ -1,7 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
-import { getOwnedGame, assertValidName, assertValidRounds } from "./model";
+import { getOwnedGame, assertValidName, assertValidRounds, normalizeCategory } from "./model";
+import { logEvent } from "./analytics";
 
 const localizedText = v.object({
   en: v.optional(v.string()),
@@ -44,17 +45,20 @@ export const get = query({
 });
 
 export const create = mutation({
-  args: { name: v.string(), rounds: v.optional(v.array(round)) },
-  handler: async (ctx, { name, rounds }) => {
+  args: { name: v.string(), category: v.optional(v.string()), rounds: v.optional(v.array(round)) },
+  handler: async (ctx, { name, category, rounds }) => {
     const userId = await getAuthUserId(ctx);
     if (!userId) throw new Error("Not signed in");
     assertValidName(name);
     assertValidRounds(rounds ?? []);
-    return await ctx.db.insert("games", {
+    const gameId = await ctx.db.insert("games", {
       ownerId: userId,
       name,
+      category: normalizeCategory(category),
       rounds: rounds ?? [],
     });
+    await logEvent(ctx, "game_created", userId, { gameId });
+    return gameId;
   },
 });
 
@@ -65,6 +69,16 @@ export const rename = mutation({
     await getOwnedGame(ctx, userId, gameId);
     assertValidName(name);
     await ctx.db.patch(gameId, { name });
+    await logEvent(ctx, "game_renamed", userId, { gameId });
+  },
+});
+
+export const setCategory = mutation({
+  args: { gameId: v.id("games"), category: v.optional(v.string()) },
+  handler: async (ctx, { gameId, category }) => {
+    const userId = await getAuthUserId(ctx);
+    await getOwnedGame(ctx, userId, gameId);
+    await ctx.db.patch(gameId, { category: normalizeCategory(category) });
   },
 });
 
@@ -74,6 +88,7 @@ export const remove = mutation({
     const userId = await getAuthUserId(ctx);
     await getOwnedGame(ctx, userId, gameId);
     await ctx.db.delete(gameId);
+    await logEvent(ctx, "game_deleted", userId, { gameId });
   },
 });
 
@@ -85,6 +100,7 @@ export const addRound = mutation({
     const rounds = [...game.rounds, newRound];
     assertValidRounds(rounds);
     await ctx.db.patch(gameId, { rounds });
+    await logEvent(ctx, "round_added", userId, { gameId });
   },
 });
 
@@ -96,6 +112,7 @@ export const updateRound = mutation({
     const rounds = game.rounds.map((r) => (r.id === updated.id ? updated : r));
     assertValidRounds(rounds);
     await ctx.db.patch(gameId, { rounds });
+    await logEvent(ctx, "round_updated", userId, { gameId });
   },
 });
 
@@ -107,6 +124,7 @@ export const removeRound = mutation({
     await ctx.db.patch(gameId, {
       rounds: game.rounds.filter((r) => r.id !== roundId),
     });
+    await logEvent(ctx, "round_removed", userId, { gameId });
   },
 });
 

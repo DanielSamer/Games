@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import { useLanguageMode } from "../../context/LanguageMode";
 
 export interface ShowCardData {
-  id: "feud" | "chaser" | "nhie";
+  id: "feud" | "chaser" | "don" | "nhie";
   to: string;
   accent: string;
   titleLinesEn: string[];

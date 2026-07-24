@@ -1,0 +1,782 @@
+[
+  {
+    "id": "don-101",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the hardest naturally occurring substance on Earth?", "ar": "إيه أصلب مادة طبيعية على سطح الأرض؟" },
+    "options": [
+      { "en": "Quartz", "ar": "الكوارتز" },
+      { "en": "Diamond", "ar": "الألماس" },
+      { "en": "Titanium", "ar": "التيتانيوم" },
+      { "en": "Graphene", "ar": "الجرافين" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-102",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "Which gas makes up the largest percentage of Earth's atmosphere?", "ar": "أي غاز بيشكل أكبر نسبة في الغلاف الجوي للأرض؟" },
+    "options": [
+      { "en": "Oxygen", "ar": "الأكسجين" },
+      { "en": "Carbon dioxide", "ar": "ثاني أكسيد الكربون" },
+      { "en": "Nitrogen", "ar": "النيتروجين" },
+      { "en": "Argon", "ar": "الأرجون" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-103",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "In which year did the Berlin Wall fall?", "ar": "في أنهي سنة سقط سور برلين؟" },
+    "options": [
+      { "en": "1985", "ar": "١٩٨٥" },
+      { "en": "1989", "ar": "١٩٨٩" },
+      { "en": "1991", "ar": "١٩٩١" },
+      { "en": "1993", "ar": "١٩٩٣" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-104",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which is the longest river in the world by length?", "ar": "إيه أطول نهر في العالم؟" },
+    "options": [
+      { "en": "Amazon River", "ar": "نهر الأمازون" },
+      { "en": "Yangtze River", "ar": "نهر اليانجتسي" },
+      { "en": "Nile River", "ar": "نهر النيل" },
+      { "en": "Mississippi River", "ar": "نهر الميسيسيبي" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-105",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "Who wrote the novel \"Crime and Punishment\"?", "ar": "مين كاتب رواية \"الجريمة والعقاب\"؟" },
+    "options": [
+      { "en": "Leo Tolstoy", "ar": "ليو تولستوي" },
+      { "en": "Fyodor Dostoevsky", "ar": "فيودور دوستويفسكي" },
+      { "en": "Anton Chekhov", "ar": "أنطون تشيخوف" },
+      { "en": "Ivan Turgenev", "ar": "إيفان تورغينيف" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-106",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "What does \"HTTP\" stand for?", "ar": "إيه معنى اختصار \"HTTP\"؟" },
+    "options": [
+      { "en": "HyperText Transfer Protocol", "ar": "بروتوكول نقل النص التشعبي" },
+      { "en": "High Transfer Text Protocol", "ar": "بروتوكول نقل النص العالي" },
+      { "en": "HyperText Transmission Process", "ar": "عملية إرسال النص التشعبي" },
+      { "en": "Home Tool Transfer Protocol", "ar": "بروتوكول نقل أداة المنزل" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-107",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "What is the largest land animal on Earth?", "ar": "إيه أكبر حيوان بري على سطح الأرض؟" },
+    "options": [
+      { "en": "White rhinoceros", "ar": "وحيد القرن الأبيض" },
+      { "en": "African elephant", "ar": "الفيل الأفريقي" },
+      { "en": "Hippopotamus", "ar": "فرس النهر" },
+      { "en": "Giraffe", "ar": "الزرافة" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-108",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "How many players are on the field for one soccer team during a match?", "ar": "كام لاعب بيلعب في الملعب لكل فريق في كرة القدم؟" },
+    "options": [
+      { "en": "9", "ar": "٩" },
+      { "en": "10", "ar": "١٠" },
+      { "en": "11", "ar": "١١" },
+      { "en": "12", "ar": "١٢" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-109",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Who painted \"The Starry Night\"?", "ar": "مين رسم لوحة \"ليلة مرصعة بالنجوم\"؟" },
+    "options": [
+      { "en": "Claude Monet", "ar": "كلود مونيه" },
+      { "en": "Vincent van Gogh", "ar": "فنسنت فان جوخ" },
+      { "en": "Pablo Picasso", "ar": "بابلو بيكاسو" },
+      { "en": "Salvador Dalí", "ar": "سلفادور دالي" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-110",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the chemical symbol for gold?", "ar": "إيه الرمز الكيميائي للذهب؟" },
+    "options": [
+      { "en": "Ag", "ar": "Ag" },
+      { "en": "Gd", "ar": "Gd" },
+      { "en": "Au", "ar": "Au" },
+      { "en": "Go", "ar": "Go" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-111",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "Which ancient civilization built Machu Picchu?", "ar": "أي حضارة قديمة بنت ماتشو بيتشو؟" },
+    "options": [
+      { "en": "Aztec", "ar": "الأزتيك" },
+      { "en": "Maya", "ar": "المايا" },
+      { "en": "Inca", "ar": "الإنكا" },
+      { "en": "Olmec", "ar": "الأولمك" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-112",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which country has the most time zones?", "ar": "أي دولة فيها أكبر عدد من المناطق الزمنية؟" },
+    "options": [
+      { "en": "Russia", "ar": "روسيا" },
+      { "en": "United States", "ar": "الولايات المتحدة" },
+      { "en": "France", "ar": "فرنسا" },
+      { "en": "China", "ar": "الصين" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-113",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "Which Shakespeare play features the characters Rosencrantz and Guildenstern?", "ar": "أي مسرحية لشكسبير فيها شخصيتا روزنكرانتز وجيلدنسترن؟" },
+    "options": [
+      { "en": "Macbeth", "ar": "ماكبث" },
+      { "en": "Hamlet", "ar": "هاملت" },
+      { "en": "Othello", "ar": "عطيل" },
+      { "en": "King Lear", "ar": "الملك لير" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-114",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "Who is credited as the co-founder of Microsoft alongside Bill Gates?", "ar": "مين شريك بيل غيتس في تأسيس مايكروسوفت؟" },
+    "options": [
+      { "en": "Steve Jobs", "ar": "ستيف جوبز" },
+      { "en": "Paul Allen", "ar": "بول ألين" },
+      { "en": "Larry Page", "ar": "لاري بيج" },
+      { "en": "Jeff Bezos", "ar": "جيف بيزوس" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-115",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "What is the fastest land animal?", "ar": "إيه أسرع حيوان بري؟" },
+    "options": [
+      { "en": "Lion", "ar": "الأسد" },
+      { "en": "Cheetah", "ar": "الفهد الصياد" },
+      { "en": "Pronghorn antelope", "ar": "ظبي البرونغهورن" },
+      { "en": "Greyhound", "ar": "كلب الجريهاوند" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-116",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "In which sport would you perform a \"slam dunk\"?", "ar": "في أنهي رياضة بيحصل \"سلام دانك\"؟" },
+    "options": [
+      { "en": "Volleyball", "ar": "الكرة الطائرة" },
+      { "en": "Basketball", "ar": "كرة السلة" },
+      { "en": "Handball", "ar": "كرة اليد" },
+      { "en": "Tennis", "ar": "التنس" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-117",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "The Sistine Chapel ceiling was painted by which artist?", "ar": "سقف كنيسة سيستين اتّرسم بواسطة أي فنان؟" },
+    "options": [
+      { "en": "Raphael", "ar": "رافائيل" },
+      { "en": "Michelangelo", "ar": "مايكل أنجلو" },
+      { "en": "Leonardo da Vinci", "ar": "ليوناردو دافنشي" },
+      { "en": "Donatello", "ar": "دوناتيلو" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-118",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "Which planet in our solar system has the most moons?", "ar": "أي كوكب في مجموعتنا الشمسية عنده أكبر عدد من الأقمار؟" },
+    "options": [
+      { "en": "Jupiter", "ar": "المشتري" },
+      { "en": "Saturn", "ar": "زحل" },
+      { "en": "Uranus", "ar": "أورانوس" },
+      { "en": "Neptune", "ar": "نبتون" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-119",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "Who was the first President of the United States?", "ar": "مين كان أول رئيس للولايات المتحدة؟" },
+    "options": [
+      { "en": "Thomas Jefferson", "ar": "توماس جيفرسون" },
+      { "en": "John Adams", "ar": "جون آدامز" },
+      { "en": "George Washington", "ar": "جورج واشنطن" },
+      { "en": "Benjamin Franklin", "ar": "بنجامين فرانكلين" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-120",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which desert is the largest hot desert in the world?", "ar": "أي صحراء هي أكبر صحراء حارة في العالم؟" },
+    "options": [
+      { "en": "Gobi Desert", "ar": "صحراء جوبي" },
+      { "en": "Kalahari Desert", "ar": "صحراء كالاهاري" },
+      { "en": "Sahara Desert", "ar": "الصحراء الكبرى" },
+      { "en": "Arabian Desert", "ar": "الصحراء العربية" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-121",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "\"One Hundred Years of Solitude\" was written by which author?", "ar": "مين كاتب رواية \"مئة عام من العزلة\"؟" },
+    "options": [
+      { "en": "Jorge Luis Borges", "ar": "خورخي لويس بورخيس" },
+      { "en": "Gabriel García Márquez", "ar": "غابرييل غارسيا ماركيز" },
+      { "en": "Mario Vargas Llosa", "ar": "ماريو فارغاس يوسا" },
+      { "en": "Pablo Neruda", "ar": "بابلو نيرودا" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-122",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "What does \"CPU\" stand for?", "ar": "إيه معنى اختصار \"CPU\"؟" },
+    "options": [
+      { "en": "Central Processing Unit", "ar": "وحدة المعالجة المركزية" },
+      { "en": "Computer Personal Unit", "ar": "وحدة الكمبيوتر الشخصية" },
+      { "en": "Central Program Utility", "ar": "أداة البرنامج المركزية" },
+      { "en": "Core Processing Utility", "ar": "أداة المعالجة الأساسية" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-123",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "How many bones are in the adult human body?", "ar": "كام عظمة في جسم الإنسان البالغ؟" },
+    "options": [
+      { "en": "196", "ar": "١٩٦" },
+      { "en": "206", "ar": "٢٠٦" },
+      { "en": "216", "ar": "٢١٦" },
+      { "en": "226", "ar": "٢٢٦" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-124",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "The Olympic Games are held every how many years?", "ar": "الألعاب الأولمبية بتتقام كل كام سنة؟" },
+    "options": [
+      { "en": "2", "ar": "٢" },
+      { "en": "3", "ar": "٣" },
+      { "en": "4", "ar": "٤" },
+      { "en": "5", "ar": "٥" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-125",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Which artist is known for cutting off part of his own ear?", "ar": "أي فنان اشتهر بقطع جزء من ودنه؟" },
+    "options": [
+      { "en": "Vincent van Gogh", "ar": "فنسنت فان جوخ" },
+      { "en": "Paul Gauguin", "ar": "بول غوغان" },
+      { "en": "Henri Matisse", "ar": "هنري ماتيس" },
+      { "en": "Edvard Munch", "ar": "إدفارد مونك" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-126",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the powerhouse of the cell?", "ar": "إيه اللي بيوصف بـ\"محطة توليد طاقة الخلية\"؟" },
+    "options": [
+      { "en": "Nucleus", "ar": "النواة" },
+      { "en": "Ribosome", "ar": "الريبوسوم" },
+      { "en": "Mitochondria", "ar": "الميتوكوندريا" },
+      { "en": "Golgi apparatus", "ar": "جهاز جولجي" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-127",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "The Great Fire of London occurred in which year?", "ar": "حريق لندن الكبير حصل في أنهي سنة؟" },
+    "options": [
+      { "en": "1566", "ar": "١٥٦٦" },
+      { "en": "1666", "ar": "١٦٦٦" },
+      { "en": "1766", "ar": "١٧٦٦" },
+      { "en": "1866", "ar": "١٨٦٦" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-128",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which country has the largest population in the world?", "ar": "أي دولة عندها أكبر عدد سكان في العالم؟" },
+    "options": [
+      { "en": "United States", "ar": "الولايات المتحدة" },
+      { "en": "India", "ar": "الهند" },
+      { "en": "China", "ar": "الصين" },
+      { "en": "Indonesia", "ar": "إندونيسيا" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-129",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "Who wrote \"Pride and Prejudice\"?", "ar": "مين كاتبة رواية \"كبرياء وتحامل\"؟" },
+    "options": [
+      { "en": "Charlotte Brontë", "ar": "شارلوت برونتي" },
+      { "en": "Jane Austen", "ar": "جين أوستن" },
+      { "en": "Emily Dickinson", "ar": "إميلي ديكنسون" },
+      { "en": "Virginia Woolf", "ar": "فرجينيا وولف" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-130",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which company originally created the Java programming language?", "ar": "أي شركة ابتكرت لغة البرمجة جافا في الأصل؟" },
+    "options": [
+      { "en": "Microsoft", "ar": "مايكروسوفت" },
+      { "en": "IBM", "ar": "آي بي إم" },
+      { "en": "Sun Microsystems", "ar": "صن مايكروسيستمز" },
+      { "en": "Oracle", "ar": "أوراكل" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-131",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "Which bird is known for its ability to mimic human speech most famously?", "ar": "أي طير مشهور بتقليد كلام البشر؟" },
+    "options": [
+      { "en": "Crow", "ar": "الغراب" },
+      { "en": "Parrot", "ar": "الببغاء" },
+      { "en": "Pigeon", "ar": "الحمامة" },
+      { "en": "Owl", "ar": "البومة" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-132",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "In tennis, what score comes immediately after \"deuce\" if the server wins the point?", "ar": "في التنس، إيه النتيجة اللي بتيجي بعد \"ديوس\" لو اللاعب اللي بيسيرف كسب النقطة؟" },
+    "options": [
+      { "en": "Game", "ar": "جيم" },
+      { "en": "Advantage", "ar": "أفانتاج" },
+      { "en": "Love", "ar": "لوف" },
+      { "en": "Set point", "ar": "ست بوينت" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-133",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Which art movement is Salvador Dalí most closely associated with?", "ar": "أي حركة فنية بيتربط بيها سلفادور دالي؟" },
+    "options": [
+      { "en": "Impressionism", "ar": "الانطباعية" },
+      { "en": "Cubism", "ar": "التكعيبية" },
+      { "en": "Surrealism", "ar": "السريالية" },
+      { "en": "Expressionism", "ar": "التعبيرية" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-134",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the speed of light in a vacuum (approximately)?", "ar": "إيه سرعة الضوء في الفراغ تقريبًا؟" },
+    "options": [
+      { "en": "150,000 km/s", "ar": "١٥٠,٠٠٠ كم/ث" },
+      { "en": "300,000 km/s", "ar": "٣٠٠,٠٠٠ كم/ث" },
+      { "en": "450,000 km/s", "ar": "٤٥٠,٠٠٠ كم/ث" },
+      { "en": "600,000 km/s", "ar": "٦٠٠,٠٠٠ كم/ث" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-135",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "Which empire built the Colosseum in Rome?", "ar": "أي إمبراطورية بنت الكولوسيوم في روما؟" },
+    "options": [
+      { "en": "Byzantine Empire", "ar": "الإمبراطورية البيزنطية" },
+      { "en": "Roman Empire", "ar": "الإمبراطورية الرومانية" },
+      { "en": "Ottoman Empire", "ar": "الإمبراطورية العثمانية" },
+      { "en": "Persian Empire", "ar": "الإمبراطورية الفارسية" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-136",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Mount Everest is located on the border of Nepal and which other country?", "ar": "جبل إيفرست موجود على الحدود بين نيبال وأي دولة تانية؟" },
+    "options": [
+      { "en": "India", "ar": "الهند" },
+      { "en": "Bhutan", "ar": "بوتان" },
+      { "en": "China (Tibet)", "ar": "الصين (التبت)" },
+      { "en": "Pakistan", "ar": "باكستان" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-137",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "In Greek mythology, who flew too close to the sun with wings made of feathers and wax?", "ar": "في الأساطير اليونانية، مين اللي طار قريب جدًا من الشمس بجناحين من الريش والشمع؟" },
+    "options": [
+      { "en": "Icarus", "ar": "إيكاروس" },
+      { "en": "Perseus", "ar": "بيرسيوس" },
+      { "en": "Theseus", "ar": "ثيسيوس" },
+      { "en": "Achilles", "ar": "أخيل" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-138",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "What does \"URL\" stand for?", "ar": "إيه معنى اختصار \"URL\"؟" },
+    "options": [
+      { "en": "Uniform Resource Locator", "ar": "محدد الموقع الموحد للمصدر" },
+      { "en": "Universal Resource Link", "ar": "رابط المصدر العالمي" },
+      { "en": "Uniform Reference Link", "ar": "رابط المرجع الموحد" },
+      { "en": "United Resource Locator", "ar": "محدد الموقع المتحد للمصدر" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-139",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "Which is the only mammal capable of true flight?", "ar": "إيه الثدي الوحيد القادر على الطيران الحقيقي؟" },
+    "options": [
+      { "en": "Flying squirrel", "ar": "السنجاب الطائر" },
+      { "en": "Bat", "ar": "الخفاش" },
+      { "en": "Sugar glider", "ar": "السكري الطائر" },
+      { "en": "Colugo", "ar": "الكولوغو" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-140",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "Which country has won the most FIFA World Cup titles?", "ar": "أي دولة فازت بأكبر عدد من بطولات كأس العالم لكرة القدم؟" },
+    "options": [
+      { "en": "Germany", "ar": "ألمانيا" },
+      { "en": "Argentina", "ar": "الأرجنتين" },
+      { "en": "Brazil", "ar": "البرازيل" },
+      { "en": "Italy", "ar": "إيطاليا" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-141",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Auguste Rodin is best known for which sculpture?", "ar": "أوغست رودان اشتهر بأي تمثال؟" },
+    "options": [
+      { "en": "The Thinker", "ar": "المفكر" },
+      { "en": "David", "ar": "داود" },
+      { "en": "The Kiss (by Klimt)", "ar": "القبلة (لكليمت)" },
+      { "en": "Venus de Milo", "ar": "فينوس دي ميلو" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-142",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the most abundant element in the universe?", "ar": "إيه أكثر عنصر انتشارًا في الكون؟" },
+    "options": [
+      { "en": "Oxygen", "ar": "الأكسجين" },
+      { "en": "Helium", "ar": "الهيليوم" },
+      { "en": "Hydrogen", "ar": "الهيدروجين" },
+      { "en": "Carbon", "ar": "الكربون" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-143",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "Which explorer's expedition is credited with the first circumnavigation of the globe?", "ar": "أي مستكشف بيُنسب له قيادة أول رحلة تدور حول الكرة الأرضية؟" },
+    "options": [
+      { "en": "Christopher Columbus", "ar": "كريستوفر كولومبوس" },
+      { "en": "Ferdinand Magellan", "ar": "فرديناند ماجلان" },
+      { "en": "Vasco da Gama", "ar": "فاسكو دا جاما" },
+      { "en": "Marco Polo", "ar": "ماركو بولو" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-144",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which African country was formerly known as Abyssinia?", "ar": "أي دولة أفريقية كانت معروفة سابقًا باسم الحبشة؟" },
+    "options": [
+      { "en": "Sudan", "ar": "السودان" },
+      { "en": "Ethiopia", "ar": "إثيوبيا" },
+      { "en": "Kenya", "ar": "كينيا" },
+      { "en": "Somalia", "ar": "الصومال" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-145",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "\"Moby-Dick\" was written by which author?", "ar": "مين كاتب رواية \"موبي ديك\"؟" },
+    "options": [
+      { "en": "Nathaniel Hawthorne", "ar": "ناثانيال هوثورن" },
+      { "en": "Herman Melville", "ar": "هيرمان ملفيل" },
+      { "en": "Mark Twain", "ar": "مارك توين" },
+      { "en": "Edgar Allan Poe", "ar": "إدغار آلان بو" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-146",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "Who is widely credited as the \"father of the World Wide Web\"?", "ar": "مين بيُعتبر \"أبو الشبكة العنكبوتية العالمية\"؟" },
+    "options": [
+      { "en": "Alan Turing", "ar": "آلان تورينج" },
+      { "en": "Tim Berners-Lee", "ar": "تيم بيرنرز-لي" },
+      { "en": "Vint Cerf", "ar": "فينت سيرف" },
+      { "en": "Steve Wozniak", "ar": "ستيف وزنياك" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-147",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "Which of these animals is a marsupial?", "ar": "أي من الحيوانات دي جرابي؟" },
+    "options": [
+      { "en": "Kangaroo", "ar": "الكنغر" },
+      { "en": "Beaver", "ar": "القندس" },
+      { "en": "Otter", "ar": "قضاعة الماء" },
+      { "en": "Hedgehog", "ar": "القنفذ" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-148",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "In golf, what term describes scoring one stroke under par on a hole?", "ar": "في الجولف، إيه المصطلح اللي بيوصف تسجيل ضربة واحدة أقل من البار في الحفرة؟" },
+    "options": [
+      { "en": "Eagle", "ar": "إيجل" },
+      { "en": "Bogey", "ar": "بوجي" },
+      { "en": "Birdie", "ar": "بيردي" },
+      { "en": "Albatross", "ar": "ألباتروس" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-149",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Which architect designed the Sagrada Família in Barcelona?", "ar": "أي مهندس معماري صمم كنيسة العائلة المقدسة في برشلونة؟" },
+    "options": [
+      { "en": "Antoni Gaudí", "ar": "أنطوني غاودي" },
+      { "en": "Le Corbusier", "ar": "لو كوربوزييه" },
+      { "en": "Frank Lloyd Wright", "ar": "فرانك لويد رايت" },
+      { "en": "Zaha Hadid", "ar": "زها حديد" }
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "don-150",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "What is the pH value of pure water at room temperature?", "ar": "إيه قيمة الأس الهيدروجيني للماء النقي في درجة حرارة الغرفة؟" },
+    "options": [
+      { "en": "5", "ar": "٥" },
+      { "en": "7", "ar": "٧" },
+      { "en": "9", "ar": "٩" },
+      { "en": "11", "ar": "١١" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-151",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "The Rosetta Stone was key to deciphering which ancient writing system?", "ar": "حجر رشيد كان مفتاح فك رموز أي نظام كتابة قديم؟" },
+    "options": [
+      { "en": "Cuneiform", "ar": "المسمارية" },
+      { "en": "Egyptian hieroglyphs", "ar": "الهيروغليفية المصرية" },
+      { "en": "Linear B", "ar": "الخط الخطي ب" },
+      { "en": "Phoenician script", "ar": "الأبجدية الفينيقية" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-152",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which is the saltiest large body of water on Earth?", "ar": "أي بحر هو أكثر مسطح مائي كبير ملوحة على الأرض؟" },
+    "options": [
+      { "en": "Red Sea", "ar": "البحر الأحمر" },
+      { "en": "Dead Sea", "ar": "البحر الميت" },
+      { "en": "Mediterranean Sea", "ar": "البحر الأبيض المتوسط" },
+      { "en": "Caspian Sea", "ar": "بحر قزوين" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-153",
+    "category": { "en": "Literature", "ar": "أدب" },
+    "difficulty": "hard",
+    "question": { "en": "Who authored the dystopian novel \"1984\"?", "ar": "مين كاتب رواية \"١٩٨٤\" الديستوبية؟" },
+    "options": [
+      { "en": "Aldous Huxley", "ar": "ألدوس هكسلي" },
+      { "en": "George Orwell", "ar": "جورج أورويل" },
+      { "en": "Ray Bradbury", "ar": "راي برادبري" },
+      { "en": "H.G. Wells", "ar": "هـ. ج. ويلز" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-154",
+    "category": { "en": "Technology", "ar": "تكنولوجيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which programming language is primarily used for styling web pages?", "ar": "أي لغة برمجة بتُستخدم أساسًا لتنسيق صفحات الويب؟" },
+    "options": [
+      { "en": "HTML", "ar": "HTML" },
+      { "en": "CSS", "ar": "CSS" },
+      { "en": "JavaScript", "ar": "جافا سكريبت" },
+      { "en": "SQL", "ar": "SQL" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-155",
+    "category": { "en": "Nature", "ar": "طبيعة" },
+    "difficulty": "hard",
+    "question": { "en": "How many hearts does an octopus have?", "ar": "كام قلب عند الأخطبوط؟" },
+    "options": [
+      { "en": "1", "ar": "١" },
+      { "en": "2", "ar": "٢" },
+      { "en": "3", "ar": "٣" },
+      { "en": "4", "ar": "٤" }
+    ],
+    "correctIndex": 2
+  },
+  {
+    "id": "don-156",
+    "category": { "en": "Sports", "ar": "رياضة" },
+    "difficulty": "hard",
+    "question": { "en": "Which country hosted the first modern Olympic Games in 1896?", "ar": "أي دولة استضافت أول ألعاب أولمبية حديثة سنة ١٨٩٦؟" },
+    "options": [
+      { "en": "France", "ar": "فرنسا" },
+      { "en": "Greece", "ar": "اليونان" },
+      { "en": "United Kingdom", "ar": "المملكة المتحدة" },
+      { "en": "Italy", "ar": "إيطاليا" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-157",
+    "category": { "en": "Art", "ar": "فن" },
+    "difficulty": "hard",
+    "question": { "en": "Frida Kahlo was a painter from which country?", "ar": "فريدا كالو كانت رسامة من أي دولة؟" },
+    "options": [
+      { "en": "Spain", "ar": "إسبانيا" },
+      { "en": "Mexico", "ar": "المكسيك" },
+      { "en": "Argentina", "ar": "الأرجنتين" },
+      { "en": "Brazil", "ar": "البرازيل" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-158",
+    "category": { "en": "Science", "ar": "علوم" },
+    "difficulty": "hard",
+    "question": { "en": "Which organ in the human body produces insulin?", "ar": "أي عضو في جسم الإنسان بينتج الأنسولين؟" },
+    "options": [
+      { "en": "Liver", "ar": "الكبد" },
+      { "en": "Pancreas", "ar": "البنكرياس" },
+      { "en": "Kidney", "ar": "الكلية" },
+      { "en": "Spleen", "ar": "الطحال" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-159",
+    "category": { "en": "History", "ar": "تاريخ" },
+    "difficulty": "hard",
+    "question": { "en": "The Magna Carta was signed in which year?", "ar": "الماغنا كارتا اتوقعت في أنهي سنة؟" },
+    "options": [
+      { "en": "1015", "ar": "١٠١٥" },
+      { "en": "1215", "ar": "١٢١٥" },
+      { "en": "1415", "ar": "١٤١٥" },
+      { "en": "1515", "ar": "١٥١٥" }
+    ],
+    "correctIndex": 1
+  },
+  {
+    "id": "don-160",
+    "category": { "en": "Geography", "ar": "جغرافيا" },
+    "difficulty": "hard",
+    "question": { "en": "Which strait separates Europe and Africa at their closest point?", "ar": "أي مضيق بيفصل بين أوروبا وأفريقيا في أقرب نقطة؟" },
+    "options": [
+      { "en": "Strait of Hormuz", "ar": "مضيق هرمز" },
+      { "en": "Strait of Gibraltar", "ar": "مضيق جبل طارق" },
+      { "en": "Bosporus Strait", "ar": "مضيق البوسفور" },
+      { "en": "Strait of Malacca", "ar": "مضيق ملقا" }
+    ],
+    "correctIndex": 1
+  }
+]

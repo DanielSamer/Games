@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
@@ -7,9 +7,11 @@ import chaserQuestionsData from "../data/chaserQuestions.json";
 import type { ChaserQuestion } from "../types/chaser";
 import { useLanguageMode } from "../context/LanguageMode";
 import { Bi } from "../components/Bi";
+import { CategoryFilterBar } from "../components/lobby/CategoryFilterBar";
 import { ChaserQuestionManager } from "../components/chaser/ChaserQuestionManager";
 
 const seedQuestions = chaserQuestionsData as ChaserQuestion[];
+const ACCENT = "#e0333f";
 
 export function ChaserLobby() {
   const { mode } = useLanguageMode();
@@ -24,6 +26,8 @@ export function ChaserLobby() {
   const ensureSeeded = useMutation(api.chaser.ensureSeeded);
 
   const [newName, setNewName] = useState("");
+  const [newCategory, setNewCategory] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null);
   const seeded = useRef(false);
   const [editingNameId, setEditingNameId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
@@ -53,6 +57,15 @@ export function ChaserLobby() {
 
   const editingGame = games?.find((g) => g._id === editingQuestionsId) ?? null;
 
+  const categories = useMemo(
+    () => Array.from(new Set((games ?? []).map((g) => g.category).filter((c): c is string => !!c))).sort(),
+    [games],
+  );
+  const visibleGames = useMemo(
+    () => (categoryFilter ? (games ?? []).filter((g) => g.category === categoryFilter) : games ?? []),
+    [games, categoryFilter],
+  );
+
   useEffect(() => {
     if (games && games.length === 0 && !seeded.current) {
       seeded.current = true;
@@ -64,8 +77,9 @@ export function ChaserLobby() {
     const name = newName.trim();
     if (!name) return;
     try {
-      await createGame({ name, questions: [] });
+      await createGame({ name, category: newCategory.trim() || undefined, questions: [] });
       setNewName("");
+      setNewCategory("");
     } catch (err) {
       setError(errorMessage(err));
     }
@@ -79,107 +93,122 @@ export function ChaserLobby() {
     }
   };
 
-  const namePlaceholder =
-    mode === "en" ? "New game name (e.g. Friday Night Chase)" : "New game name / اسم اللعبة الجديدة";
-
   return (
-    <div className="page-center chaser-theme">
-      <div className="lobby-card lobby-card--chaser">
-        <Link to="/" className="stub-back">
+    <div className="game-lobby game-lobby--chaser">
+      <div className="game-lobby__panel" style={{ "--accent": ACCENT } as CSSProperties}>
+        <Link to="/" className="game-lobby__back">
           ← <Bi en="Back to menu" ar="رجوع للقائمة" />
         </Link>
-        <span className="lobby-card__eyebrow">
-          <Bi en="Host mode" ar="وضع المُقدِّم" />
-        </span>
-        <h1 className="lobby-title">
-          <Bi en="Catch Him — Your Games" ar="إلحقوه — ألعابك" />
+        <h1 className="game-lobby__title">
+          <Bi en="Catch Him" ar="إلحقوه" />
         </h1>
-        <p className="lobby-subtitle">
-          <Bi en="Pick a saved game to host, or create a new one." ar="اختار لعبة محفوظة أو أنشئ لعبة جديدة." />
+        <p className="game-lobby__desc">
+          <Bi
+            en="A contestant races the Chaser to bank as much of the prize fund as possible."
+            ar="متسابق بيتسابق مع الملاحق عشان يجمع أكبر قدر من الجائزة."
+          />
         </p>
 
-        <div className="lobby-create">
+        <CategoryFilterBar categories={categories} selected={categoryFilter} onSelect={setCategoryFilter} />
+
+        <div className="game-lobby__create">
           <input
             type="text"
-            placeholder={namePlaceholder}
+            placeholder={mode === "en" ? "New game name" : "اسم اللعبة الجديدة"}
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") void handleCreate();
             }}
           />
+          <input
+            type="text"
+            name="category"
+            placeholder={mode === "en" ? "Category (optional)" : "الفئة (اختياري)"}
+            list="chaser-categories"
+            value={newCategory}
+            onChange={(e) => setNewCategory(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") void handleCreate();
+            }}
+          />
+          <datalist id="chaser-categories">
+            {categories.map((c) => (
+              <option key={c} value={c} />
+            ))}
+          </datalist>
           <button type="button" onClick={() => void handleCreate()} disabled={!newName.trim()}>
-            + <Bi en="Create Game" ar="إنشاء لعبة" />
+            + <Bi en="Create" ar="إنشاء" />
           </button>
         </div>
 
         {games === undefined ? (
-          <p className="loading-text">
+          <p className="game-lobby__empty">
             <Bi en="Loading your games…" ar="بيتم تحميل ألعابك..." />
           </p>
-        ) : games.length === 0 ? (
-          <p className="modal__empty">
-            <Bi en="No saved games yet — create one above." ar="لسه مفيش ألعاب محفوظة — أنشئ واحدة فوق." />
+        ) : visibleGames.length === 0 ? (
+          <p className="game-lobby__empty">
+            <Bi en="No saved games here yet." ar="لسه مفيش ألعاب محفوظة هنا." />
           </p>
         ) : (
-          <ul className="lobby-list">
-            {games.map((game) =>
-              editingNameId === game._id ? (
-                <li key={game._id} className="lobby-list__item">
-                  <input
-                    type="text"
-                    className="lobby-list__name-input"
-                    value={editingName}
-                    autoFocus
-                    onChange={(e) => setEditingName(e.target.value)}
-                    onBlur={() => void commitEditingName(game._id, game.name)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") void commitEditingName(game._id, game.name);
-                      if (e.key === "Escape") setEditingNameId(null);
-                    }}
-                  />
-                </li>
-              ) : (
-                <li key={game._id} className="lobby-list__item">
-                  <Link to={`/chaser/${game._id}`} className="lobby-list__link">
-                    <span
-                      className="lobby-list__name"
-                      title={mode === "en" ? "Click to rename" : "اضغط للتعديل"}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        startEditingName(game._id, game.name);
+          <ul className="pack-list">
+            {visibleGames.map((game) => (
+              <li key={game._id} className="pack-card">
+                <div className="pack-card__main">
+                  {editingNameId === game._id ? (
+                    <input
+                      type="text"
+                      className="pack-card__name-input"
+                      value={editingName}
+                      autoFocus
+                      onChange={(e) => setEditingName(e.target.value)}
+                      onBlur={() => void commitEditingName(game._id, game.name)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") void commitEditingName(game._id, game.name);
+                        if (e.key === "Escape") setEditingNameId(null);
                       }}
+                    />
+                  ) : (
+                    <span
+                      className="pack-card__name"
+                      title={mode === "en" ? "Click to rename" : "اضغط للتعديل"}
+                      onClick={() => startEditingName(game._id, game.name)}
                     >
                       {game.name}
                     </span>
-                    <span className="lobby-list__count">{game.questions.length} question(s)</span>
+                  )}
+                  <div className="pack-card__meta">
+                    {game.category && <span className="pack-card__category">{game.category}</span>}
+                    <span className="pack-card__count">
+                      {game.questions.length} {mode === "en" ? "question(s)" : "سؤال"}
+                    </span>
+                  </div>
+                </div>
+                <div className="pack-card__actions">
+                  <Link to={`/chaser/${game._id}`} className="pack-btn pack-btn--primary">
+                    <Bi en="Play" ar="لعب" />
                   </Link>
                   <button
                     type="button"
-                    className="lobby-list__edit"
+                    className="pack-btn pack-btn--ghost"
                     onClick={() => setEditingQuestionsId(game._id)}
                   >
                     <Bi en="Edit" ar="تعديل" />
                   </button>
                   <button
                     type="button"
-                    className="lobby-list__delete"
+                    className="pack-btn pack-btn--danger"
                     onClick={() => void handleRemove(game._id)}
                   >
                     <Bi en="Delete" ar="حذف" />
                   </button>
-                </li>
-              ),
-            )}
+                </div>
+              </li>
+            ))}
           </ul>
         )}
 
-        {error && (
-          <p className="menu-auth-error" role="alert">
-            {error}
-          </p>
-        )}
+        {error && <p className="game-lobby__error">{error}</p>}
       </div>
 
       <ChaserQuestionManager

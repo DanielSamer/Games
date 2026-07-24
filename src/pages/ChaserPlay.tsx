@@ -19,6 +19,7 @@ export function ChaserPlay() {
   const updateQuestion = useMutation(api.chaser.updateQuestion);
   const removeQuestion = useMutation(api.chaser.removeQuestion);
   const importQuestions = useMutation(api.chaser.importQuestions);
+  const logClientEvent = useMutation(api.analytics.logClientEvent);
 
   const questions = game?.questions ?? [];
   const {
@@ -41,6 +42,15 @@ export function ChaserPlay() {
   useEffect(() => {
     setMuted(state.muted);
   }, [state.muted]);
+
+  useEffect(() => {
+    if (!game) return;
+    void logClientEvent({
+      eventType: "game_play_started",
+      payload: { gameId: game._id, gameType: "chaser" },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [game?._id]);
 
   useEffect(() => {
     document.documentElement.dir = "ltr";

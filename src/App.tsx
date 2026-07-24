@@ -7,7 +7,12 @@ import { FamilyFeudPlay } from "./pages/FamilyFeudPlay";
 import { ChaserLobby } from "./pages/ChaserLobby";
 import { ChaserPlay } from "./pages/ChaserPlay";
 import { GameStub } from "./pages/GameStub";
+import { DblOrNothingLobby } from "./pages/DblOrNothingLobby";
+import { DblOrNothingHost } from "./pages/DblOrNothingHost";
+import { DblOrNothingJoin } from "./pages/DblOrNothingJoin";
 import { RequireAuth } from "./components/RequireAuth";
+import { RequireAdmin } from "./components/RequireAdmin";
+import { AdminDashboard } from "./pages/AdminDashboard";
 
 function App() {
   return (
@@ -46,6 +51,34 @@ function App() {
         element={
           <RequireAuth>
             <ChaserPlay />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/double-or-nothing"
+        element={
+          <RequireAuth>
+            <DblOrNothingLobby />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/double-or-nothing/host/:roomId"
+        element={
+          <RequireAuth>
+            <DblOrNothingHost />
+          </RequireAuth>
+        }
+      />
+      {/* Public — players reach this by scanning a QR code, no account needed */}
+      <Route path="/don/:code" element={<DblOrNothingJoin />} />
+      <Route
+        path="/admin"
+        element={
+          <RequireAuth>
+            <RequireAdmin>
+              <AdminDashboard />
+            </RequireAdmin>
           </RequireAuth>
         }
       />

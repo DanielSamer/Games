@@ -1,0 +1,89 @@
+-- Analytics queries — reference doc, not executable SQL
+-- ============================================================
+-- This project's backend is Convex (a document database), not a SQL
+-- database, so there is no query engine to run this file against. Each
+-- block below documents one product question and names the real
+-- implementation, a Convex `internalQuery` in convex/analyticsQueries.ts.
+-- The SQL is illustrative — it shows the shape of the answer, written
+-- against a hypothetical relational view of the same `events` table, for
+-- anyone more comfortable reading SQL than TypeScript.
+--
+-- Scope note: Phase A only instruments what exists today — host accounts
+-- and game/question CRUD + play-starts. There is no room/session/player/
+-- QR-join layer yet, so the funnel, question-quality, reliability, and
+-- per-player questions from the original spec are NOT implemented here.
+-- They're deferred until that layer is built (see README "What's not
+-- collected (yet)").
+-- ============================================================
+
+-- Q: Host sign-ups and sign-ins per day, last 30 days.
+-- Convex: convex/analyticsQueries.ts -> hostActivityByDay
+-- SELECT
+--   date_trunc('day', occurred_at)                                   AS day,
+--   count(*) FILTER (WHERE event_type = 'host_signed_up')            AS signed_up,
+--   count(*) FILTER (WHERE event_type = 'host_signed_in')            AS signed_in
+-- FROM events
+-- WHERE event_type IN ('host_signed_up', 'host_signed_in')
+--   AND occurred_at >= now() - interval '30 days'
+-- GROUP BY 1
+-- ORDER BY 1;
+
+-- Q: How many hosts ran a second play session within 30 days of their
+--    first? ("Session" here = a game_play_started event — the closest
+--    analog Phase A has to a room/session, since there's no live-room
+--    layer yet.)
+-- Convex: convex/analyticsQueries.ts -> hostRepeatWithin30Days
+-- WITH host_plays AS (
+--   SELECT user_id, occurred_at,
+--          row_number() OVER (PARTITION BY user_id ORDER BY occurred_at) AS rn
+--   FROM events
+--   WHERE event_type = 'game_play_started' AND user_id IS NOT NULL
+-- ),
+-- first_two AS (
+--   SELECT user_id,
+--          max(occurred_at) FILTER (WHERE rn = 1) AS first_play,
+--          max(occurred_at) FILTER (WHERE rn = 2) AS second_play
+--   FROM host_plays
+--   GROUP BY user_id
+-- )
+-- SELECT
+--   count(*)                                                          AS hosts_with_any_play,
+--   count(*) FILTER (
+--     WHERE second_play IS NOT NULL
+--       AND second_play - first_play <= interval '30 days'
+--   )                                                                  AS hosts_with_repeat_within_30_days
+-- FROM first_two;
+
+-- Q: Which games are chosen, and which are never chosen? (times a game's
+--    play screen was opened, grouped by game)
+-- Convex: convex/analyticsQueries.ts -> gamePlayStartsByGame
+-- SELECT
+--   payload->>'gameId'                                                AS game_id,
+--   payload->>'gameType'                                              AS game_type,
+--   count(*)                                                          AS times_started
+-- FROM events
+-- WHERE event_type = 'game_play_started'
+-- GROUP BY 1, 2
+-- ORDER BY 3 DESC;
+
+-- Q: How many games were created, by type, over time?
+-- Convex: convex/analyticsQueries.ts -> gamesCreatedByDay
+-- SELECT
+--   date_trunc('day', occurred_at)                                    AS day,
+--   count(*) FILTER (WHERE event_type = 'game_created')               AS family_feud_created,
+--   count(*) FILTER (WHERE event_type = 'chaser_created')             AS chaser_created
+-- FROM events
+-- WHERE event_type IN ('game_created', 'chaser_created')
+-- GROUP BY 1
+-- ORDER BY 1;
+
+-- ============================================================
+-- Deferred (need the multiplayer room/player layer first):
+--   - unique devices / unique accounts / total joins per period
+--   - landing_view -> room_joined -> first_answer funnel + drop-off
+--   - question % correct, skip rate, median time-to-answer, difficulty match
+--   - game abandonment + round reached, session length, player count
+--   - disconnect/reconnect events, players who joined but never answered
+--   - language switched mid-night, peak concurrent players, returning
+--     players per session, host acquisition source
+-- ============================================================
